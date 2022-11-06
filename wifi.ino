@@ -10,7 +10,7 @@ char wifiSsid[] = SECRET_WIFI_SSID;
 char wifiPass[] = SECRET_WIFI_PASS;
 char hostname[] = SECRET_HOSTNAME;
 
-void initWifi() {
+void WifiConnection::initWifi() {
   DEBUG_PRINT("Connecting to ");
   DEBUG_PRINTLN(wifiSsid);
 
@@ -21,9 +21,8 @@ void initWifi() {
   connectToWifi();
 }
 
-void connectToWifi() {
+void WifiConnection::connectToWifi() {
 
-  WiFi.disconnect(false);
   WiFi.begin(wifiSsid, wifiPass);
 
   while (WiFi.status() != WL_CONNECTED) {
@@ -35,14 +34,14 @@ void connectToWifi() {
   }
 }
 
-void onWifiConnect(const WiFiEventStationModeGotIP& event) {
+void WifiConnection::onWifiConnect(const WiFiEventStationModeGotIP& event) {
   DEBUG_PRINT("Connected to WiFi ");
   DEBUG_PRINTLN(wifiSsid);
   DEBUG_PRINT("IP address: ");
   DEBUG_PRINTLN(WiFi.localIP());
 }
 
-void onWifiDisconnect(const WiFiEventStationModeDisconnected& event) {
+void WifiConnection::onWifiDisconnect(const WiFiEventStationModeDisconnected& event) {
   DEBUG_PRINTLN("Disconnected from WiFi ");
   DEBUG_PRINTLN(wifiSsid);
   // Apparently this is not even required, since ESP8266WiFiClass tries to reconnect like a mad man anyway.
