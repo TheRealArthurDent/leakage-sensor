@@ -1,4 +1,4 @@
-#define DEBUG // Debug flag
+#define DEBUG  // Debug flag
 #include "debug.h"
 
 #define led_built_in_ESP 2
