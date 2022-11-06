@@ -1,4 +1,4 @@
-name: cpplint
+name: CPP Lint
 
 on: 
   push:
