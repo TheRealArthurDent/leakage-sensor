@@ -25,4 +25,4 @@ jobs:
           library-manager: update
           # Always use this setting for official repositories. Remove for 3rd party projects.
           official: true
-          project-type: library
+          project-type: all
