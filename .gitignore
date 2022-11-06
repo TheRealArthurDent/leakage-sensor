@@ -1,0 +1,4 @@
+# Data folder
+data/
+# Do not push secrets files.
+*secrets.h
