@@ -1,5 +1,10 @@
-#include <ESP8266WiFi.h>
+#include "wifi.h"
+#include <Ticker.h>
 #include "wifi_secrets.h"
+
+WiFiEventHandler wifiConnectHandler;
+WiFiEventHandler wifiDisconnectHandler;
+Ticker wifiReconnectTimer;
 
 char wifiSsid[] = SECRET_WIFI_SSID;
 char wifiPass[] = SECRET_WIFI_PASS;
@@ -11,6 +16,14 @@ void initWifi() {
 
   WiFi.mode(WIFI_STA);
   WiFi.hostname(hostname);
+  wifiConnectHandler = WiFi.onStationModeGotIP(onWifiConnect);
+  wifiDisconnectHandler = WiFi.onStationModeDisconnected(onWifiDisconnect);
+  connectToWifi();
+}
+
+void connectToWifi() {
+
+  WiFi.disconnect(false);
   WiFi.begin(wifiSsid, wifiPass);
 
   while (WiFi.status() != WL_CONNECTED) {
@@ -20,9 +33,18 @@ void initWifi() {
     delay(250);
     DEBUG_PRINT(".");
   }
+}
 
-  DEBUG_PRINTLN("");
-  DEBUG_PRINTLN("WiFi connected");
-  DEBUG_PRINTLN("IP address: ");
+void onWifiConnect(const WiFiEventStationModeGotIP& event) {
+  DEBUG_PRINT("Connected to WiFi ");
+  DEBUG_PRINTLN(wifiSsid);
+  DEBUG_PRINT("IP address: ");
   DEBUG_PRINTLN(WiFi.localIP());
+}
+
+void onWifiDisconnect(const WiFiEventStationModeDisconnected& event) {
+  DEBUG_PRINTLN("Disconnected from WiFi ");
+  DEBUG_PRINTLN(wifiSsid);
+  // Apparently this is not even required, since ESP8266WiFiClass tries to reconnect like a mad man anyway.
+  // wifiReconnectTimer.once(2, connectToWifi);
 }
