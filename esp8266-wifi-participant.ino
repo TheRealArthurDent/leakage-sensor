@@ -1,29 +1,41 @@
 #include <ESP8266WiFi.h>
 #include "wifi_secrets.h"
 
+#define DEBUG // Debug flag
+
+#ifdef DEBUG
+#define DEBUG_PRINT(x) Serial.print(x)
+#define DEBUG_PRINTLN(x) Serial.println(x)
+#else
+#define DEBUG_PRINT(x)
+#define DEBUG_PRINTLN(x)
+#endif
 
 #define led_built_in_ESP 2
 #define led_built_in_Node 16
 
 char wifiSsid[] = SECRET_WIFI_SSID;
 char wifiPass[] = SECRET_WIFI_PASS;
+char hostname[] = SECRET_HOSTNAME;
 
 void setup() {
 
-  Serial.begin(115200);
+  #ifdef DEBUG
+    Serial.begin(115200);
+  #endif
 
   pinMode(led_built_in_ESP, OUTPUT);
   pinMode(led_built_in_Node, OUTPUT);
   digitalWrite(led_built_in_Node, HIGH);
   digitalWrite(led_built_in_ESP, HIGH);
 
-  Serial.println();
-  Serial.println();
-  Serial.print("Connecting to ");
-  Serial.println(wifiSsid);
+  DEBUG_PRINTLN();
+  DEBUG_PRINTLN();
+  DEBUG_PRINT("Connecting to ");
+  DEBUG_PRINTLN(wifiSsid);
 
   WiFi.mode(WIFI_STA);
-  WiFi.hostname("TestParticipant");
+  WiFi.hostname(hostname);
   WiFi.begin(wifiSsid, wifiPass);
 
   while (WiFi.status() != WL_CONNECTED) {
@@ -31,13 +43,13 @@ void setup() {
     delay(250);
     digitalWrite(led_built_in_ESP, HIGH);
     delay(250);
-    Serial.print(".");
+    DEBUG_PRINT(".");
   }
 
-  Serial.println("");
-  Serial.println("WiFi connected");
-  Serial.println("IP address: ");
-  Serial.println(WiFi.localIP());
+  DEBUG_PRINTLN("");
+  DEBUG_PRINTLN("WiFi connected");
+  DEBUG_PRINTLN("IP address: ");
+  DEBUG_PRINTLN(WiFi.localIP());
 }
 
 void loop() {
