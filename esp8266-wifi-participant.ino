@@ -1,4 +1,4 @@
-#define DEBUG // Debug flag
+#define DEBUG  // Debug flag
 #include "debug.h"
 
 #define led_built_in_ESP 2
@@ -22,7 +22,7 @@ void loop() {
 
 void blinkLed() {
   digitalWrite(led_built_in_Node, LOW);
-  delay(2000);
+  delay(2500);
   digitalWrite(led_built_in_Node, HIGH);
-  delay(2000);
+  delay(2500);
 }

@@ -1,2 +1,7 @@
 # esp8266-wifi-participant
 A tiny sample project that makes your ESP8266 a participant in a WiFi network.
+On startup your board will try to connect to the specified WiFi network and will blink the built in ESP LED (GPIO 2) at 2 revolution per second while doing so.
+Once successfully connected the node LED (GPIO 16) will blink at 1 revolution per 5 seconds.
+If started with "#define DEBUG" it will log the progress via the Serial port.
+
+To be able to compile the project locally, copy the wifi_secrets.h.example to wifi_secrets.h and adjust the values within said file.
