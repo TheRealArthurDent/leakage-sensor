@@ -19,6 +19,7 @@ jobs:
           #- esp32:esp32:esp32c6
           #- esp32:esp32:esp32h2
           - esp8266:esp8266:huzzah
+          - esp8266:esp8266:nodemcuv2
 
     steps:
       - uses: actions/checkout@v3
