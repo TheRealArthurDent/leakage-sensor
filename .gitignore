@@ -1,3 +1,5 @@
+# IntelliJ
+.idea/
 # Data folder
 data/
 # Do not push secrets files.

@@ -5,7 +5,6 @@
 #define led_built_in_ESP 2
 #define led_built_in_Node 16
 
-
 void setup() {
 
   initDebugging();
@@ -14,8 +13,9 @@ void setup() {
   pinMode(led_built_in_Node, OUTPUT);
   digitalWrite(led_built_in_Node, HIGH);
   digitalWrite(led_built_in_ESP, HIGH);
-
-  initWifi();
+  
+  WifiConnection wifi;
+  wifi.initWifi();
 }
 
 void loop() {

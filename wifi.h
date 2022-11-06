@@ -1,7 +1,17 @@
+#ifndef WIFI_CONNECTION_H
+#define WIFI_CONNECTION_H
+
 #include <ESP8266WiFi.h>
 
-void initWifi();
+class WifiConnection {
 
-void connectToWifi();
-void onWifiConnect(const WiFiEventStationModeGotIP& event);
-void onWifiDisconnect(const WiFiEventStationModeDisconnected& event);
+public:
+  void initWifi();
+
+private:
+  void connectToWifi();
+  static void onWifiConnect(const WiFiEventStationModeGotIP& event);
+  static void onWifiDisconnect(const WiFiEventStationModeDisconnected& event);
+};
+
+#endif
