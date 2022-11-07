@@ -17,8 +17,6 @@ void WifiConnection::init() {
   WiFi.mode(WIFI_STA);
   WiFi.hostname(hostname);
   wifiConnectHandler = WiFi.onStationModeGotIP(onWifiConnect);
-  WiFi.onConnectionLost();
-  WiFi.onWifiDisconnect();
   wifiDisconnectHandler = WiFi.onStationModeDisconnected(onWifiDisconnect);
   connect();
 }
