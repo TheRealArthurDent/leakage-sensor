@@ -1,7 +1,6 @@
 #define DEBUG  // Debug flag
 #include "debug.h"
 #include "wifi.h"
-#include "dummy-wifi-dependent.h"
 
 #define led_built_in_ESP 2
 #define led_built_in_Node 16
