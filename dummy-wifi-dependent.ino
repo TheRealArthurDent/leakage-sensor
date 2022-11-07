@@ -1,10 +1,10 @@
 #include "dummy-wifi-dependent.h"
 #include "debug.h"
 
-void DummyWifiDependent::onConnectionEstablished() {
+void DummyWifiDependent::onWifiConnectionEstablished() {
   DEBUG_PRINTLN("DummyWifiDependent connected!");
 }
 
-void DummyWifiDependent::onConnectionLost() {
+void DummyWifiDependent::onWifiConnectionLost() {
   DEBUG_PRINTLN("DummyWifiDependent disconnected!");
 }

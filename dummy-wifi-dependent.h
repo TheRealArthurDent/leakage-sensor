@@ -6,8 +6,8 @@
 class DummyWifiDependent : public WifiDependent {
 
 public:
-  virtual void onConnectionEstablished();
-  virtual void onConnectionLost();
+  virtual void onWifiConnectionEstablished();
+  virtual void onWifiConnectionLost();
 };
 
 #endif

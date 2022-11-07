@@ -4,8 +4,8 @@
 class WifiDependent {
 
 public:
-  virtual void onConnectionEstablished() = 0;
-  virtual void onConnectionLost() {}
+  virtual void onWifiConnectionEstablished() = 0;
+  virtual void onWifiConnectionLost() {}
 };
 
 #endif
