@@ -1,6 +1,7 @@
 #include "wifi.h"
 #include <Ticker.h>
 #include "wifi_secrets.h"
+#include "led.h"
 
 WiFiEventHandler wifiConnectHandler;
 WiFiEventHandler wifiDisconnectHandler;
