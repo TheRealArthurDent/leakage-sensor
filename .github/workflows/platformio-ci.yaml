@@ -8,7 +8,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
+    - name: Copy secrets examples
+      run: |
+        cp include/wifi_secrets.h.example include/wifi_secrets.h
     - name: Cache pip
       uses: actions/cache@v2
       with:
