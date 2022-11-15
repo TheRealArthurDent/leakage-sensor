@@ -4,7 +4,7 @@
 #include "led.h"
 #define DEBUG // Debug flag
 #include "debug.h"
-#include "wifi.h"
+#include "wifi-connection.h"
 #include "dummy-wifi-dependent.h"
 
 void setup()

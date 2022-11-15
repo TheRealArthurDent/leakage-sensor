@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Copy secrets examples
         run: |
-          cp wifi_secrets.h.example wifi_secrets.h
+          cp include/wifi_secrets.h.example include/wifi_secrets.h
       - uses: arduino/compile-sketches@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
