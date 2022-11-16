@@ -1,10 +1,14 @@
 #include "dummy-wifi-dependent.h"
 #include "debug.h"
 
-void DummyWifiDependent::onWifiConnectionEstablished() {
+// cppcheck-suppress unusedFunction
+void DummyWifiDependent::onWifiConnectionEstablished()
+{
   DEBUG_PRINTLN("DummyWifiDependent connected!");
 }
 
-void DummyWifiDependent::onWifiConnectionLost() {
+// cppcheck-suppress unusedFunction
+void DummyWifiDependent::onWifiConnectionLost()
+{
   DEBUG_PRINTLN("DummyWifiDependent disconnected!");
 }

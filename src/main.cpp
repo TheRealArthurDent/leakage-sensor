@@ -7,6 +7,7 @@
 #include "wifi-connection.h"
 #include "dummy-wifi-dependent.h"
 
+// cppcheck-suppress unusedFunction
 void setup()
 {
 
@@ -27,6 +28,7 @@ void setup()
   WifiConnection::getInstance().init(deps);
 }
 
+// cppcheck-suppress unusedFunction
 void loop()
 {
   blinkLed();

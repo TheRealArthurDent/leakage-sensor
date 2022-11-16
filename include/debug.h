@@ -11,4 +11,4 @@
 
 void initDebugging();
 
-#endif
+#endif // DEBUG_H

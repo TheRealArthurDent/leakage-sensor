@@ -3,11 +3,12 @@
 
 #include "wifi-dependent.h"
 
-class DummyWifiDependent : public WifiDependent {
+const class DummyWifiDependent : public WifiDependent
+{
 
 public:
-  virtual void onWifiConnectionEstablished();
-  virtual void onWifiConnectionLost();
+  virtual void onWifiConnectionEstablished() override;
+  virtual void onWifiConnectionLost() override;
 };
 
 #endif

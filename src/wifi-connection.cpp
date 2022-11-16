@@ -11,7 +11,8 @@ char wifiSsid[] = SECRET_WIFI_SSID;
 char wifiPass[] = SECRET_WIFI_PASS;
 char hostname[] = SECRET_HOSTNAME;
 
-void WifiConnection::init() {
+void WifiConnection::init()
+{
   DEBUG_PRINT("Connecting to ");
   DEBUG_PRINTLN(wifiSsid);
 
@@ -22,34 +23,45 @@ void WifiConnection::init() {
   connect();
 }
 
-void WifiConnection::init(std::list<WifiDependent*> dependentsList) {
+void WifiConnection::init(std::list<WifiDependent *> dependentsList)
+{
   dependents.clear();
-  std::for_each(dependentsList.begin(), dependentsList.end(), [this](WifiDependent* d) { dependents.push_back(d); });
+  std::for_each(dependentsList.begin(), dependentsList.end(), [this](WifiDependent *d)
+                { dependents.push_back(d); });
 
   init();
 }
 
-bool WifiConnection::isConnected() {
+// cppcheck-suppress unusedFunction
+bool WifiConnection::isConnected()
+{
   return connected;
 }
 
-void WifiConnection::setConnected(bool conn) {
+void WifiConnection::setConnected(bool conn)
+{
   connected = conn;
 }
 
-void WifiConnection::notifyDependentsConnected() {
-  std::for_each(dependents.begin(), dependents.end(), [](WifiDependent* d) { d->onWifiConnectionEstablished(); });
+void WifiConnection::notifyDependentsConnected()
+{
+  std::for_each(dependents.begin(), dependents.end(), [](WifiDependent *d)
+                { d->onWifiConnectionEstablished(); });
 }
 
-void WifiConnection::notifyDependentsDisconnected() {
-  std::for_each(dependents.begin(), dependents.end(), [](WifiDependent* d) { d->onWifiConnectionLost(); });
+void WifiConnection::notifyDependentsDisconnected()
+{
+  std::for_each(dependents.begin(), dependents.end(), [](WifiDependent *d)
+                { d->onWifiConnectionLost(); });
 }
 
-void WifiConnection::connect() {
+void WifiConnection::connect()
+{
 
   WiFi.begin(wifiSsid, wifiPass);
 
-  while (WiFi.status() != WL_CONNECTED) {
+  while (WiFi.status() != WL_CONNECTED)
+  {
     digitalWrite(led_built_in_ESP, LOW);
     delay(250);
     digitalWrite(led_built_in_ESP, HIGH);
@@ -58,7 +70,8 @@ void WifiConnection::connect() {
   }
 }
 
-void WifiConnection::onWifiConnect(const WiFiEventStationModeGotIP& event) {
+void WifiConnection::onWifiConnect(const WiFiEventStationModeGotIP &event)
+{
   DEBUG_PRINT("Connected to WiFi ");
   DEBUG_PRINTLN(wifiSsid);
   DEBUG_PRINT("IP address: ");
@@ -68,7 +81,8 @@ void WifiConnection::onWifiConnect(const WiFiEventStationModeGotIP& event) {
   getInstance().notifyDependentsConnected();
 }
 
-void WifiConnection::onWifiDisconnect(const WiFiEventStationModeDisconnected& event) {
+void WifiConnection::onWifiDisconnect(const WiFiEventStationModeDisconnected &event)
+{
   DEBUG_PRINTLN("Disconnected from WiFi ");
   DEBUG_PRINTLN(wifiSsid);
 
