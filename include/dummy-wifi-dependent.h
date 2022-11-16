@@ -3,7 +3,7 @@
 
 #include "wifi-dependent.h"
 
-const class DummyWifiDependent : public WifiDependent
+class DummyWifiDependent : public WifiDependent
 {
 
 public:

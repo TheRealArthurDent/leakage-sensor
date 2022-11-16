@@ -1,7 +1,7 @@
 #ifndef WIFI_DEPENDENT_H
 #define WIFI_DEPENDENT_H
 
-const class WifiDependent
+class WifiDependent
 {
 
 public:
