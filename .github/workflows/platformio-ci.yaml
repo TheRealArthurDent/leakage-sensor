@@ -11,7 +11,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Copy secrets examples
       run: |
-        cp include/wifi_secrets.h.example include/wifi_secrets.h
+        cp include/wifi-secrets.h.example include/wifi-secrets.h
     - name: Cache pip
       uses: actions/cache@v3
       with:
