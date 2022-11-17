@@ -15,12 +15,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Copy secrets examples
+      - name: Prepare Arduino IDE compatability
         run: |
           cp include/wifi_secrets.h.example include/wifi_secrets.h
           cd scripts
           sh migrate_to_ino.sh
-          ls ../esp8266-wifi-participant
       - uses: arduino/compile-sketches@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
