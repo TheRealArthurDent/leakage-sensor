@@ -10,3 +10,6 @@
 
 # Do not push secrets files.
 *secrets.h
+
+# Arduino IDE compatability
+esp8266-wifi-participant/
