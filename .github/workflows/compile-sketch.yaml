@@ -18,11 +18,9 @@ jobs:
       - name: Copy secrets examples
         run: |
           cp include/wifi_secrets.h.example include/wifi_secrets.h
-          which bash
-          which sh
-          which zsh
           cd scripts
           sh migrate_to_ino.sh
+          ls ../esp8266-wifi-participant
       - uses: arduino/compile-sketches@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
