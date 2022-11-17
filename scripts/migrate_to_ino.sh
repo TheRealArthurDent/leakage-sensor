@@ -11,7 +11,8 @@ PROJECT_NAME=esp8266-wifi-participant
 (
     # copy files
     cd .. || exit
-    cp -r src ${PROJECT_NAME}
+    mkdir ${PROJECT_NAME}
+    cp -r src/* ${PROJECT_NAME}
     cp -r include/* ${PROJECT_NAME}
 )
 
@@ -22,5 +23,5 @@ PROJECT_NAME=esp8266-wifi-participant
     # Rename "main" sketch
     mv main.cpp ${PROJECT_NAME}.ino
     # Rename remaining cpp files
-    find -type f -name '*.cpp' -exec mv {} {}.ino \;
+    find -type f -name '*.cpp' -exec sh -c 'mv "$1" "${1%.cpp}.ino"' _ {} \;
 )
