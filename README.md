@@ -9,6 +9,8 @@
 
 [![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com/)
 
+[![GitHub pull-requests](https://img.shields.io/github/issues-pr/TheRealArthurDent/esp8266-wifi-participant.svg)](https://GitHub.com/TheRealArthurDent/esp8266-wifi-participant/pull/)
+
 ### Description
 
 A tiny sample project that makes your ESP8266 a participant in a WiFi network.
