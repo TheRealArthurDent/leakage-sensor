@@ -3,7 +3,7 @@
 #include <ESP8266WiFi.h>
 #include <list>
 #include <vector>
-#include "wifi-dependent.h"
+#include "wifi-dependent.hpp"
 
 class WifiConnection
 {
