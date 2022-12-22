@@ -1,4 +1,4 @@
-#include "dummy-wifi-dependent.h"
+#include "dummy-wifi-dependent.hpp"
 #include "debug.h"
 
 void DummyWifiDependent::onWifiConnectionEstablished() {
