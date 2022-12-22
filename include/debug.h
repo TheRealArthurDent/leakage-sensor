@@ -1,5 +1,4 @@
-#ifndef DEBUG_H
-#define DEBUG_H
+#pragma once
 
 #include <Arduino.h>
 
@@ -12,5 +11,3 @@
 #endif
 
 void initDebugging();
-
-#endif // DEBUG_H

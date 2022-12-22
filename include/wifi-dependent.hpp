@@ -1,5 +1,4 @@
-#ifndef WIFI_DEPENDENT_H
-#define WIFI_DEPENDENT_H
+#pragma once
 
 class WifiDependent
 {
@@ -8,5 +7,3 @@ public:
   virtual void onWifiConnectionEstablished() = 0;
   virtual void onWifiConnectionLost() {}
 };
-
-#endif

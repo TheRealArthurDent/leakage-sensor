@@ -3,8 +3,8 @@
 #include "main.h"
 #include "led.h"
 #include "debug.h"
-#include "wifi-connection.h"
-#include "dummy-wifi-dependent.h"
+#include "wifi-connection.hpp"
+#include "dummy-wifi-dependent.hpp"
 
 // cppcheck-suppress unusedFunction
 void setup()

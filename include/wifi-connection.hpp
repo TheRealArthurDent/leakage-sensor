@@ -1,10 +1,9 @@
-#ifndef WIFI_CONNECTION_H
-#define WIFI_CONNECTION_H
+#pragma once
 
 #include <ESP8266WiFi.h>
 #include <list>
 #include <vector>
-#include "wifi-dependent.h"
+#include "wifi-dependent.hpp"
 
 class WifiConnection
 {
@@ -42,5 +41,3 @@ private:
   static void onWifiConnect(const WiFiEventStationModeGotIP &event);
   static void onWifiDisconnect(const WiFiEventStationModeDisconnected &event);
 };
-
-#endif
