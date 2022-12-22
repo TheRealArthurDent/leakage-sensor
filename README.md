@@ -1,8 +1,25 @@
 # esp8266-wifi-participant
+
+License
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+Status
+
 [![Check Arduino status](https://github.com/TheRealArthurDent/esp8266-wifi-participant/actions/workflows/check-arduino.yaml/badge.svg)](https://github.com/TheRealArthurDent/esp8266-wifi-participant/actions/workflows/check-arduino.yaml)
 [![CPP Lint status](https://github.com/TheRealArthurDent/esp8266-wifi-participant/actions/workflows/cpp-lint.yaml/badge.svg)](https://github.com/TheRealArthurDent/esp8266-wifi-participant/actions/workflows/cpp-lint.yaml)
 [![Compile Sketch status](https://github.com/TheRealArthurDent/esp8266-wifi-participant/actions/workflows/compile-sketch.yaml/badge.svg)](https://github.com/TheRealArthurDent/esp8266-wifi-participant/actions/workflows/compile-sketch.yaml)
 [![Spell Check status](https://github.com/TheRealArthurDent/esp8266-wifi-participant/actions/workflows/spell-check.yaml/badge.svg)](https://github.com/TheRealArthurDent/esp8266-wifi-participant/actions/workflows/spell-check.yaml)
+
+Always fresh
+
+[![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com/)
+
+Open topics
+
+[![GitHub issues](https://img.shields.io/github/issues/TheRealArthurDent/esp8266-wifi-participant.svg)](https://GitHub.com/TheRealArthurDent/esp8266-wifi-participant/issues/)
+[![GitHub pull-requests](https://img.shields.io/github/issues-pr/TheRealArthurDent/esp8266-wifi-participant.svg)](https://GitHub.com/TheRealArthurDent/esp8266-wifi-participant/pull/)
+
 
 ### Description
 

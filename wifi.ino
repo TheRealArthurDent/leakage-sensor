@@ -1,4 +1,4 @@
-#include "wifi.h"
+#include "wifi.hpp"
 #include <Ticker.h>
 #include "wifi_secrets.h"
 

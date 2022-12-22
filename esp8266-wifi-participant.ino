@@ -1,6 +1,6 @@
 #define DEBUG  // Debug flag
 #include "debug.h"
-#include "wifi.h"
+#include "wifi.hpp"
 #include "dummy-wifi-dependent.h"
 
 #define led_built_in_ESP 2
@@ -14,7 +14,7 @@ void setup() {
   pinMode(led_built_in_Node, OUTPUT);
   digitalWrite(led_built_in_Node, HIGH);
   digitalWrite(led_built_in_ESP, HIGH);
-  
+
   DummyWifiDependent dependent1;
   DummyWifiDependent dependent2;
 
