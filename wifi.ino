@@ -37,11 +37,11 @@ void WifiConnection::setConnected(bool conn) {
 }
 
 void WifiConnection::notifyDependentsConnected() {
-  std::for_each(dependents.begin(), dependents.end(), [](WifiDependent* d) { d->onConnectionEstablished(); });
+  std::for_each(dependents.begin(), dependents.end(), [](WifiDependent* d) { d->onWifiConnectionEstablished(); });
 }
 
 void WifiConnection::notifyDependentsDisconnected() {
-  std::for_each(dependents.begin(), dependents.end(), [](WifiDependent* d) { d->onConnectionLost(); });
+  std::for_each(dependents.begin(), dependents.end(), [](WifiDependent* d) { d->onWifiConnectionLost(); });
 }
 
 void WifiConnection::connect() {
