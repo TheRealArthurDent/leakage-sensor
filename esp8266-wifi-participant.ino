@@ -1,6 +1,6 @@
 #define DEBUG  // Debug flag
 #include "debug.h"
-#include "wifi.h"
+#include "wifi.hpp"
 
 #define led_built_in_ESP 2
 #define led_built_in_Node 16
@@ -13,9 +13,8 @@ void setup() {
   pinMode(led_built_in_Node, OUTPUT);
   digitalWrite(led_built_in_Node, HIGH);
   digitalWrite(led_built_in_ESP, HIGH);
-  
-  WifiConnection wifi;
-  wifi.initWifi();
+
+  WifiConnection::getInstance().init();
 }
 
 void loop() {
