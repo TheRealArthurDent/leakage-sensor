@@ -1,6 +1,6 @@
 #include "Arduino.h"
 
-#include "main.h"
+#include "main.hpp"
 #include "led.h"
 #include "debug.h"
 #include "wifi-connection.hpp"
