@@ -3,13 +3,15 @@
 #include "wifi-secrets.h"
 #include "led.h"
 
+#define FLASH_INTERVAL 250
+
 WiFiEventHandler wifiConnectHandler;
 WiFiEventHandler wifiDisconnectHandler;
-Ticker wifiReconnectTimer;
+// Ticker wifiReconnectTimer;
 
-char wifiSsid[] = SECRET_WIFI_SSID;
-char wifiPass[] = SECRET_WIFI_PASS;
-char hostname[] = SECRET_HOSTNAME;
+const char wifiSsid[] = SECRET_WIFI_SSID;
+const char wifiPass[] = SECRET_WIFI_PASS;
+const char hostname[] = SECRET_HOSTNAME;
 
 void WifiConnection::init()
 {
@@ -63,9 +65,9 @@ void WifiConnection::connect()
   while (WiFi.status() != WL_CONNECTED)
   {
     digitalWrite(led_built_in_ESP, LOW);
-    delay(250);
+    delay(FLASH_INTERVAL);
     digitalWrite(led_built_in_ESP, HIGH);
-    delay(250);
+    delay(FLASH_INTERVAL);
     DEBUG_PRINT(".");
   }
 }

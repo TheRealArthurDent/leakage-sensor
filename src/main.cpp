@@ -6,6 +6,8 @@
 #include "wifi-connection.hpp"
 #include "dummy-wifi-dependent.hpp"
 
+#define BLINK_INTERVAL 2500
+
 // cppcheck-suppress unusedFunction
 void setup()
 {
@@ -36,7 +38,7 @@ void loop()
 void blinkLed()
 {
   digitalWrite(led_built_in_Node, LOW);
-  delay(2500);
+  delay(BLINK_INTERVAL);
   digitalWrite(led_built_in_Node, HIGH);
-  delay(2500);
+  delay(BLINK_INTERVAL);
 }
