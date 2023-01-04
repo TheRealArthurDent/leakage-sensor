@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PROJECT_NAME=esp8266-wifi-participant
+PROJECT_NAME=esp8266-ota-capable
 
 (
     # cleanup

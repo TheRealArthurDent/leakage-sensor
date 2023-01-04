@@ -1,7 +1,7 @@
 {
 	"folders": [
 		{
-			"name": "esp8266-wifi-participant",
+			"name": "esp8266-ota-capable",
 			"path": "."
 		}
 	],

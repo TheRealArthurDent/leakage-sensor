@@ -12,4 +12,4 @@
 *secrets.h
 
 # Arduino IDE compatability
-esp8266-wifi-participant/
+esp8266-ota-capable/
