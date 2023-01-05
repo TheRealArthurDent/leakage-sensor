@@ -28,7 +28,8 @@ Open topics
 
 ## Description
 
-A tiny sample project that is based on esp8266-wifi-participant but is updatable over-the-air.
+A tiny sample project that is based on esp8266-wifi-participant
+but is updatable over-the-air.
 On startup your board will try to connect to the specified WiFi network and will
 blink the built in ESP LED (GPIO 2) at 2 revolution per second while doing so.
 Once successfully connected the node LED (GPIO 16) will blink at 1 revolution
