@@ -37,5 +37,5 @@ If started with "#define DEBUG" it will log the progress via the Serial port.
 
 ## How-to-use
 
-To be able to compile the project locally, copy the secrets.ini.example
+To be able to compile the project locally, copy the secrets.ini.template
 to secrets.ini and adjust the values within said file.
