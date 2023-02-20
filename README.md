@@ -38,5 +38,5 @@ If started with "#define DEBUG" it will log the progress via the Serial port.
 
 ## How-to-use
 
-To be able to compile the project locally, copy the wifi_secrets.h.example
-to wifi_secrets.h and adjust the values within said file.
+To be able to compile the project locally, copy the secrets.ini.example
+to secrets.ini and adjust the values within said file.
