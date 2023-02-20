@@ -29,4 +29,6 @@ jobs:
           sketch-paths: |
             - ./esp8266-wifi-participant
           cli-compile-flags: |
-            - --preprocess --warnings="none" --build-property "build.extra_flags="-DSECRET_HOSTNAME=\"TestParticipant\"\" "-DSECRET_WIFI_SSID=\"foo\"\" "-DSECRET_WIFI_PASS=\"bar\"\" "
+            - --preprocess 
+              --warnings="none" 
+              --build-property "build.extra_flags="-DSECRET_HOSTNAME=\"TestParticipant\"\" "-DSECRET_WIFI_SSID=\"foo\"\" "-DSECRET_WIFI_PASS=\"bar\"\" "
