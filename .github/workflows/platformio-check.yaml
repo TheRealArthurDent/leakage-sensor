@@ -9,9 +9,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Copy secrets examples
+    - name: Copy secrets template
       run: |
-        cp secrets.ini.example secrets.ini
+        cp secrets.ini.template secrets.ini
     - name: Cache pip
       uses: actions/cache@v3
       with:
