@@ -11,7 +11,7 @@ WiFiEventHandler wifiDisconnectHandler;
 void WifiConnection::init()
 {
   DEBUG_PRINT("Connecting to ");
-  DEBUG_PRINTLN(wifiSsid);
+  DEBUG_PRINTLN(SECRET_WIFI_SSID);
 
   WiFi.mode(WIFI_STA);
   WiFi.hostname(SECRET_HOSTNAME);
