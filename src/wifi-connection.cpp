@@ -2,7 +2,7 @@
 #include <Ticker.h>
 #include "led.h"
 
-#define FLASH_INTERVAL 250
+constexpr int flashInterval() { return 250; }
 
 WiFiEventHandler wifiConnectHandler;
 WiFiEventHandler wifiDisconnectHandler;
@@ -60,9 +60,9 @@ void WifiConnection::connect()
   while (WiFi.status() != WL_CONNECTED)
   {
     digitalWrite(led_built_in_ESP, LOW);
-    delay(FLASH_INTERVAL);
+    delay(flashInterval());
     digitalWrite(led_built_in_ESP, HIGH);
-    delay(FLASH_INTERVAL);
+    delay(flashInterval());
     DEBUG_PRINT(".");
   }
 }
