@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PROJECT_NAME=esp8266-mqtt-client
+PROJECT_NAME=leakage-sensor
 
 (
     # cleanup

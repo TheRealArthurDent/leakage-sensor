@@ -30,6 +30,6 @@ jobs:
             - source-url: https://github.com/marvinroger/async-mqtt-client/archive/master.zip
             - source-url: https://github.com/me-no-dev/ESPAsyncTCP/archive/master.zip
           sketch-paths: |
-            - ./esp8266-mqtt-client
+            - ./leakage-sensor
           cli-compile-flags: |
             - --preprocess

@@ -14,4 +14,4 @@ secrets.ini
 *secrets.h
 
 # Arduino IDE compatability
-esp8266-mqtt-client/
+leakage-sensor/

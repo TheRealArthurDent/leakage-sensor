@@ -1,4 +1,4 @@
-# esp8266-mqtt-client
+# leakage-sensor
 
 License
 
@@ -6,16 +6,16 @@ License
 
 Status
 
-[![PlatformIO Code Check](https://github.com/TheRealArthurDent/esp8266-mqtt-client/actions/workflows/platformio-check.yaml/badge.svg)](https://github.com/TheRealArthurDent/esp8266-mqtt-client/actions/workflows/platformio-check.yaml)
-[![PlatformIO CI](https://github.com/TheRealArthurDent/esp8266-mqtt-client/actions/workflows/platformio-ci.yaml/badge.svg)](https://github.com/TheRealArthurDent/esp8266-mqtt-client/actions/workflows/platformio-ci.yaml)
-[![CPP Lint status](https://github.com/TheRealArthurDent/esp8266-mqtt-client/actions/workflows/cpp-lint.yaml/badge.svg)](https://github.com/TheRealArthurDent/esp8266-mqtt-client/actions/workflows/cpp-lint.yaml)
-[![Spell Check status](https://github.com/TheRealArthurDent/esp8266-mqtt-client/actions/workflows/spell-check.yaml/badge.svg)](https://github.com/TheRealArthurDent/esp8266-mqtt-client/actions/workflows/spell-check.yaml)
-[![Markdown Lint](https://github.com/TheRealArthurDent/esp8266-mqtt-client/actions/workflows/markdown-lint.yaml/badge.svg)](https://github.com/TheRealArthurDent/esp8266-mqtt-client/actions/workflows/markdown-lint.yaml)
+[![PlatformIO Code Check](https://github.com/TheRealArthurDent/leakage-sensor/actions/workflows/platformio-check.yaml/badge.svg)](https://github.com/TheRealArthurDent/leakage-sensor/actions/workflows/platformio-check.yaml)
+[![PlatformIO CI](https://github.com/TheRealArthurDent/leakage-sensor/actions/workflows/platformio-ci.yaml/badge.svg)](https://github.com/TheRealArthurDent/leakage-sensor/actions/workflows/platformio-ci.yaml)
+[![CPP Lint status](https://github.com/TheRealArthurDent/leakage-sensor/actions/workflows/cpp-lint.yaml/badge.svg)](https://github.com/TheRealArthurDent/leakage-sensor/actions/workflows/cpp-lint.yaml)
+[![Spell Check status](https://github.com/TheRealArthurDent/leakage-sensor/actions/workflows/spell-check.yaml/badge.svg)](https://github.com/TheRealArthurDent/leakage-sensor/actions/workflows/spell-check.yaml)
+[![Markdown Lint](https://github.com/TheRealArthurDent/leakage-sensor/actions/workflows/markdown-lint.yaml/badge.svg)](https://github.com/TheRealArthurDent/leakage-sensor/actions/workflows/markdown-lint.yaml)
 
 ## Compatibility with Arduino IDE
 
-[![Check Arduino status](https://github.com/TheRealArthurDent/esp8266-mqtt-client/actions/workflows/check-arduino.yaml/badge.svg)](https://github.com/TheRealArthurDent/esp8266-mqtt-client/actions/workflows/check-arduino.yaml)
-[![Compile Sketch status](https://github.com/TheRealArthurDent/esp8266-mqtt-client/actions/workflows/compile-sketch.yaml/badge.svg)](https://github.com/TheRealArthurDent/esp8266-mqtt-client/actions/workflows/compile-sketch.yaml)
+[![Check Arduino status](https://github.com/TheRealArthurDent/leakage-sensor/actions/workflows/check-arduino.yaml/badge.svg)](https://github.com/TheRealArthurDent/leakage-sensor/actions/workflows/check-arduino.yaml)
+[![Compile Sketch status](https://github.com/TheRealArthurDent/leakage-sensor/actions/workflows/compile-sketch.yaml/badge.svg)](https://github.com/TheRealArthurDent/leakage-sensor/actions/workflows/compile-sketch.yaml)
 
 Always fresh
 
@@ -23,8 +23,8 @@ Always fresh
 
 Open topics
 
-[![GitHub issues](https://img.shields.io/github/issues/TheRealArthurDent/esp8266-mqtt-client.svg)](https://GitHub.com/TheRealArthurDent/esp8266-mqtt-client/issues/)
-[![GitHub pull-requests](https://img.shields.io/github/issues-pr/TheRealArthurDent/esp8266-mqtt-client.svg)](https://GitHub.com/TheRealArthurDent/esp8266-mqtt-client/pull/)
+[![GitHub issues](https://img.shields.io/github/issues/TheRealArthurDent/leakage-sensor.svg)](https://GitHub.com/TheRealArthurDent/leakage-sensor/issues/)
+[![GitHub pull-requests](https://img.shields.io/github/issues-pr/TheRealArthurDent/leakage-sensor.svg)](https://GitHub.com/TheRealArthurDent/leakage-sensor/pull/)
 
 ## Description
 

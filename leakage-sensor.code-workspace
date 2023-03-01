@@ -1,7 +1,7 @@
 {
 	"folders": [
 		{
-			"name": "esp8266-mqtt-client",
+			"name": "leakage-sensor",
 			"path": "."
 		}
 	],
