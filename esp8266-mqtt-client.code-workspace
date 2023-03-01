@@ -1,7 +1,7 @@
 {
 	"folders": [
 		{
-			"name": "esp8266-ota-capable",
+			"name": "esp8266-mqtt-client",
 			"path": "."
 		}
 	],
@@ -9,7 +9,8 @@
 		"files.autoSave": "onFocusChange",
 		"files.associations": {
 			"*.tcc": "cpp",
-			"algorithm": "cpp"
+			"algorithm": "cpp",
+			"string": "cpp"
 		}
 	}
 }

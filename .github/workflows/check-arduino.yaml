@@ -29,4 +29,4 @@ jobs:
           # Always use this setting for official repositories. Remove for 3rd party projects.
           official: true
           project-type: all
-          path: ./esp8266-ota-capable
+          path: ./esp8266-mqtt-client

@@ -3,13 +3,25 @@
 #include "debug.h"
 #include "wifi-connection.hpp"
 
-char mqttHost[] = SECRET_MQTT_HOST;
-
 AsyncMqttClient mqttClient;
 Ticker mqttReconnectTimer;
 
+const int QOS_AT_MOST_ONCE = 0;
+const int QOS_AT_LEAST_ONCE = 1;
+const int QOS_EXACTLY_ONCE = 2;
+
+const char *TOPIC_BASE = "subscribers/";
+const char *TOPIC_CONNECTION_STATUS = "/connection-status";
+
 void MqttClient::init()
 {
+  connectionStatusTopic = new char[strlen(TOPIC_BASE) + strlen(SECRET_HOSTNAME) + strlen(TOPIC_CONNECTION_STATUS)];
+
+  strcpy(connectionStatusTopic, TOPIC_BASE);
+  strcat(connectionStatusTopic, SECRET_HOSTNAME);
+  strcat(connectionStatusTopic, TOPIC_CONNECTION_STATUS);
+  mqttClient.setWill(connectionStatusTopic, QOS_AT_LEAST_ONCE, true, "DISCONNECTED");
+
   // mqttClient.onConnect(onConnect);
   mqttClient.onConnect([this](bool sessionPresent)
                        { onConnect(sessionPresent); });
@@ -37,6 +49,7 @@ void MqttClient::connect()
 void MqttClient::onWifiConnectionEstablished()
 {
   DEBUG_PRINTLN("WiFi connected!");
+
   connect();
 }
 
@@ -53,7 +66,9 @@ void MqttClient::onConnect(bool sessionPresent)
   DEBUG_PRINT("Session present: ");
   DEBUG_PRINTLN(sessionPresent);
 
-  mqttClient.subscribe("ventilation/settings", 2);
+  mqttClient.publish(connectionStatusTopic, QOS_AT_LEAST_ONCE, true, "CONNECTED");
+
+  mqttClient.subscribe("mqttclient/test", 2);
 }
 
 void MqttClient::onDisconnect(AsyncMqttClientDisconnectReason reason)
@@ -87,4 +102,10 @@ void MqttClient::onMessage(char *topic, char *payload, AsyncMqttClientMessagePro
   DEBUG_PRINTLN(index);
   DEBUG_PRINT("  total: ");
   DEBUG_PRINTLN(total);
+
+  char testTopic[80];
+  strcpy(testTopic, TOPIC_BASE);
+  strcat(testTopic, SECRET_HOSTNAME);
+  strcat(testTopic, "/latestReceived");
+  mqttClient.publish(testTopic, QOS_AT_MOST_ONCE, false, payload, len);
 }
