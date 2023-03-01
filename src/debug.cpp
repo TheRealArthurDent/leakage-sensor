@@ -1,4 +1,8 @@
-void initDebugging() {
+#include "debug.h"
+
+// cppcheck-suppress unusedFunction
+void initDebugging()
+{
 #ifdef DEBUG
   Serial.begin(115200);
 #endif
