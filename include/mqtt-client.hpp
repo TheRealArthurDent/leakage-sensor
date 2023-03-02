@@ -1,10 +1,14 @@
 #pragma once
 
 #include <AsyncMqttClient.h>
+#include <Ticker.h>
 #include "wifi-dependent.hpp"
 
 class MqttClient : public WifiDependent
 {
+  AsyncMqttClient mqttClient;
+  Ticker mqttReconnectTimer;
+
 public:
   void init();
   void onWifiConnectionEstablished() override;
