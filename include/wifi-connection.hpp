@@ -1,12 +1,16 @@
 #pragma once
 
-#include "ESP8266WiFi.h"
+#include <ESP8266WiFi.h>
+#include <Ticker.h>
 #include <list>
 #include <vector>
 #include "wifi-dependent.hpp"
 
 class WifiConnection
 {
+  WiFiEventHandler wifiConnectHandler;
+  WiFiEventHandler wifiDisconnectHandler;
+  // Ticker wifiReconnectTimer;
 
   bool connected = false;
   std::vector<WifiDependent *> dependents;
