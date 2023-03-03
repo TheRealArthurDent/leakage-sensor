@@ -45,32 +45,12 @@ private:
 
   // normal methods
 public:
-  /**
-   * Returns the WiFi connection status.
-   *
-   * \return \c true in case the WiFi connection is established
-   * or \c false otherwise.
-   */
   auto isConnected() -> bool;
-
-  /**
-   * Initializes the controller while registering a collection of
-   * \c WifiDependent s.
-   *
-   * \param dependents A collection of instances that depend on a WiFi
-   * connection. The dependents will be informed about changes in the
-   * connection's status.
-   */
   void init(std::list<WifiDependent *> dependents);
   // void addDependent
   // void removeDependent
 
 private:
-  /**
-   * An init method, that does not register any dependents.
-   * It's currently private since no add or remove methods for
-   * \c WifiDependents exist. Might become \c public in case that changes.
-   */
   void init();
   void connect();
   void setConnected(bool connected);
