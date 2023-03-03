@@ -23,6 +23,14 @@ jobs:
         with:
           doxyfile-path: 'docs/Doxygen'
 
+      - name: messin-around
+        run: |
+          ls
+          cd docs
+          ls
+          cd generated
+          ls
+
       # - name: Deploy
       #   uses: peaceiris/actions-gh-pages@v3
       #   if: ${{ github.ref == 'refs/heads/main' }}

@@ -1,4 +1,4 @@
 PROJECT_NAME     = ESP8266 WiFi Participant
 INPUT            = src
 INCLUDE_PATH     = include
-OUTPUT_PATH      = docs/generated
+OUTPUT_DIRECTORY = docs/generated
