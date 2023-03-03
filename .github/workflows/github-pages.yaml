@@ -25,10 +25,7 @@ jobs:
 
       - name: messin-around
         run: |
-          ls
-          cd docs
-          ls
-          cd generated
+          cd docs/generated/html
           ls
 
       # - name: Deploy
