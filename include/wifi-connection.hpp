@@ -27,7 +27,7 @@ class WifiConnection
   // Singleton "constructor"
 public:
   /**
-   * Get's the \c Singleton instance.
+   * Gets the \c Singleton instance.
    */
   static auto getInstance() -> WifiConnection &
   {
@@ -57,7 +57,7 @@ public:
    * Initializes the controller while registering a collection of
    * \c WifiDependent s.
    *
-   * \param dependents A colletion of instances that depend on a WiFi
+   * \param dependents A collection of instances that depend on a WiFi
    * connection. The dependents will be informed about changes in the
    * connection's status.
    */
