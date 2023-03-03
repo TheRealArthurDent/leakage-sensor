@@ -1,10 +1,6 @@
 #include "mqtt-client.hpp"
-#include "Ticker.h"
 #include "debug.h"
 #include "wifi-connection.hpp"
-
-AsyncMqttClient mqttClient;
-Ticker mqttReconnectTimer;
 
 const int QOS_AT_MOST_ONCE = 0;
 const int QOS_AT_LEAST_ONCE = 1;

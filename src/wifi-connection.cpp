@@ -1,12 +1,7 @@
 #include "wifi-connection.hpp"
-#include <Ticker.h>
 #include "led.h"
 
 const int FLASH_INTERVAL = 250;
-
-WiFiEventHandler wifiConnectHandler;
-WiFiEventHandler wifiDisconnectHandler;
-// Ticker wifiReconnectTimer;
 
 void WifiConnection::init()
 {
