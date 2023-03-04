@@ -13,8 +13,8 @@
  * establish a connection, attempt reconnects in case of a connection loss
  * and inform registered \c WifiDependent s about successful connects as well
  * as connection losses by calling their
- * (<WifiDependent>"::") <onWifiConnectionEstablished>"()" or
- * (<WifiDependent>"::") <onWifiConnectionLost>"()" callback respectively.
+ * WifiDependent::onWifiConnectionEstablished() or
+ * WifiDependent::onWifiConnectionLost() callback respectively.
  */
 class WifiConnection
 {
