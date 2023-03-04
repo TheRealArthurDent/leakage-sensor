@@ -12,8 +12,9 @@
  * A singleton that will take care of your WiFi connection. It will try to
  * establish a connection, attempt reconnects in case of a connection loss
  * and inform registered \c WifiDependent s about successful connects as well
- * as connection losses by calling their \c onWifiConnectionEstablished or
- * \c onWifiConnectionLost callback respectively.
+ * as connection losses by calling their
+ * (<WifiDependent>"::") <onWifiConnectionEstablished>"()" or
+ * (<WifiDependent>"::") <onWifiConnectionLost>"()" callback respectively.
  */
 class WifiConnection
 {
