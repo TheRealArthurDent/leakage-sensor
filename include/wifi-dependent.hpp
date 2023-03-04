@@ -3,7 +3,7 @@
 /**
  * \brief An interface defining a controller that depends on a WiFi connection.
  *
- * Implemeting class will receive callbacks in case the WiFi connection is
+ * Implementing class will receive callbacks in case the WiFi connection is
  * established or lost.
  */
 class WifiDependent
