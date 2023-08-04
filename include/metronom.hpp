@@ -41,7 +41,7 @@ public:
     Metronom &operator=(Metronom const &); // Don't implement.
 
     /**
-     * Blocks until the next cyle starts.
+     * Blocks until the next cycle starts.
      * Might return immediately if the Metronom has been configured NOT to skip
      * missed cycles.
      * \see Metronom(int, bool)
