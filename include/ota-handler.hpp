@@ -8,8 +8,7 @@
  * This controller will accept authorized uploads to your controller on the ota
  * port configured via \code SECRET_OTA_PORT \endcode.
  * The controller will simply delegate uploads to
- * \link <https://github.com/esp8266/Arduino/tree/master/libraries/ArduinoOTA>
- * ArduinoOTA \endlink.
+ * <a href="https://github.com/esp8266/Arduino/tree/master/libraries/ArduinoOTA">ArduinoOTA</a>.
  */
 class OtaHandler : public WifiDependent
 {
