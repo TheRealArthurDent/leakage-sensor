@@ -10,7 +10,8 @@
 		"files.associations": {
 			"*.tcc": "cpp",
 			"algorithm": "cpp",
-			"string": "cpp"
+			"string": "cpp",
+			"functional": "cpp"
 		}
 	}
 }

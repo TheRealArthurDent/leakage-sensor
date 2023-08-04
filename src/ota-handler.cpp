@@ -7,6 +7,11 @@
  * But who cares as long as it works, right?            *
  ********************************************************/
 
+/**
+ * This method will be called by \c WiFiConnection once a network connection
+ * has been established. It will then start-up ArduinoOTA and let it listen
+ * for uploads on the port specified by \code SECRET_OTA_PORT \endcode.
+ */
 // cppcheck-suppress unusedFunction
 void OtaHandler::onWifiConnectionEstablished()
 {
@@ -50,6 +55,9 @@ void OtaHandler::onWifiConnectionEstablished()
   DEBUG_PRINTLN("ArduinoOTA ready.");
 }
 
+/**
+ * Simply forwards uploads to ArduinoOTA.
+ */
 void OtaHandler::handleUpload()
 {
   if (ready)
