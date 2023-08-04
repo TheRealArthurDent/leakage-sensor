@@ -29,8 +29,8 @@ public:
   void onWifiConnectionEstablished() override;
   /**
    * This method will just log that it has been disconnected.
-   * The async-mqtt-client will try to reconnect itself, so no need to handle
-   * this withing this controller.
+   * ESP8266WiFi in \c WiFiConnection will try to reconnect itself, so no need
+   * to handle this within this controller.
    */
   void onWifiConnectionLost() override;
 
