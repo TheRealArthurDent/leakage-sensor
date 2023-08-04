@@ -6,8 +6,6 @@
 
 class MqttClient : public WifiDependent
 {
-  AsyncMqttClient mqttClient;
-  Ticker mqttReconnectTimer;
 
 public:
   void init();

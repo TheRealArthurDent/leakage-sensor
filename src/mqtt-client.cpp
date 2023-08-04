@@ -9,6 +9,9 @@ const int QOS_EXACTLY_ONCE = 2;
 const char *TOPIC_BASE = "subscribers/";
 const char *TOPIC_CONNECTION_STATUS = "/connection-status";
 
+AsyncMqttClient mqttClient;
+Ticker mqttReconnectTimer;
+
 void MqttClient::init()
 {
   connectionStatusTopic = new char[strlen(TOPIC_BASE) + strlen(SECRET_HOSTNAME) + strlen(TOPIC_CONNECTION_STATUS)];
