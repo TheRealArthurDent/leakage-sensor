@@ -8,6 +8,9 @@ on:
 jobs:
   merge-upstream:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        upstream_repo: ['TheRealArthurDent/esp8266-ota-capable']
     steps:
       - name: Setup SSH Keys and known_hosts
         env:
@@ -32,7 +35,7 @@ jobs:
 
       - name: Add remote
         run: |
-          git remote add upstream git@github.com:TheRealArthurDent/esp8266-wifi-participant.git
+          git remote add upstream git@github.com:${{ matrix.upstream_repo }}.git
 
       - name: Fetch upstream
         run: |
