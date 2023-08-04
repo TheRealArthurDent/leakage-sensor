@@ -32,7 +32,7 @@ jobs:
 
       - name: Add remote
         run: |
-          git remote add upstream git@github.com:TheRealArthurDent/nextcloud.git
+          git remote add upstream git@github.com:TheRealArthurDent/esp8266-wifi-participant.git
 
       - name: Fetch upstream
         run: |
