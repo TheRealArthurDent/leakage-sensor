@@ -1,0 +1,6 @@
+PROJECT_NAME     = ESP8266 Ota Capable
+INPUT            = src \
+                   include \
+                   docs
+INCLUDE_PATH     = include
+OUTPUT_DIRECTORY = docs/generated
