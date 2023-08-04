@@ -1,6 +1,7 @@
 #pragma once
 
 #include "wifi-dependent.hpp"
+#include <AsyncMqttClient.hpp>
 
 /**
  * \brief A very basic MQTT client.

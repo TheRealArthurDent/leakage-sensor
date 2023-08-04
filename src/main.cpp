@@ -48,7 +48,4 @@ void blinkLed()
   digitalWrite(led_built_in_Node, HIGH);
 
   metronom.waitForNextCycle();
-
-  DEBUG_PRINT("Loop ended at: ");
-  DEBUG_PRINTLN(millis());
 }
