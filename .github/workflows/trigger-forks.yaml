@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         # Add more forks here if applicable
-        repo: ['TheRealArthurDent/esp8266-ota-capable']
+        repo: ['TheRealArthurDent/leakage_sensor']
     timeout-minutes: 5
     steps:
       - name: Dispatch to workflows
