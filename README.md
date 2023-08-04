@@ -44,4 +44,4 @@ to secrets.ini and adjust the values within said file.
 
 ## Documentation
 
-[Source code documentation](https://therealarthurdent.github.io/esp8266-ota-capable/index.html)
+[Source code documentation](https://therealarthurdent.github.io/esp8266-mqtt-client/index.html)

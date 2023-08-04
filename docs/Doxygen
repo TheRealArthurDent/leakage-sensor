@@ -1,4 +1,4 @@
-PROJECT_NAME     = ESP8266 Ota Capable
+PROJECT_NAME     = ESP8266 WiFi Client
 INPUT            = src \
                    include \
                    docs
