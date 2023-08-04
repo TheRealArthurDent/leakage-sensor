@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        upstream_repo: ['TheRealArthurDent/esp8266-ota-capable']
+        upstream_repo: ['TheRealArthurDent/esp8266-mqtt-client']
     steps:
       - name: Setup SSH Keys and known_hosts
         env:

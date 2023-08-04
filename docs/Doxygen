@@ -1,4 +1,4 @@
-PROJECT_NAME     = ESP8266 WiFi Client
+PROJECT_NAME     = Leakage sensor
 INPUT            = src \
                    include \
                    docs
