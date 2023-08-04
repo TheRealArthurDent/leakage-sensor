@@ -39,3 +39,7 @@ If started with "#define DEBUG" it will log the progress via the Serial port.
 
 To be able to compile the project locally, copy the secrets.ini.template
 to secrets.ini and adjust the values within said file.
+
+## Documentation
+
+[Source code documentation](https://therealarthurdent.github.io/esp8266-wifi-participant/index.html)

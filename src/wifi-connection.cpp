@@ -1,13 +1,13 @@
 #include "wifi-connection.hpp"
-#include <Ticker.h>
 #include "led.h"
 
-constexpr int flashInterval() { return 250; }
+const int FLASH_INTERVAL = 250;
 
-WiFiEventHandler wifiConnectHandler;
-WiFiEventHandler wifiDisconnectHandler;
-// Ticker wifiReconnectTimer;
-
+/**
+ * An init method, that does not register any dependents.
+ * It's currently private since no add or remove methods for
+ * \c WifiDependents exist. Might become \c public in case that changes.
+ */
 void WifiConnection::init()
 {
   DEBUG_PRINT("Connecting to ");
@@ -20,6 +20,14 @@ void WifiConnection::init()
   connect();
 }
 
+/**
+ * Initializes the controller while registering a collection of
+ * \c WifiDependent s.
+ *
+ * \param dependents A collection of instances that depend on a WiFi
+ * connection. The dependents will be informed about changes in the
+ * connection's status.
+ */
 void WifiConnection::init(std::list<WifiDependent *> dependentsList)
 {
   dependents.clear();
@@ -29,6 +37,12 @@ void WifiConnection::init(std::list<WifiDependent *> dependentsList)
   init();
 }
 
+/**
+ * Returns the WiFi connection status.
+ *
+ * \return \c true in case the WiFi connection is established
+ * or \c false otherwise.
+ */
 // cppcheck-suppress unusedFunction
 bool WifiConnection::isConnected()
 {
@@ -60,9 +74,9 @@ void WifiConnection::connect()
   while (WiFi.status() != WL_CONNECTED)
   {
     digitalWrite(led_built_in_ESP, LOW);
-    delay(flashInterval());
+    delay(FLASH_INTERVAL);
     digitalWrite(led_built_in_ESP, HIGH);
-    delay(flashInterval());
+    delay(FLASH_INTERVAL);
     DEBUG_PRINT(".");
   }
 }
