@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "esp8266-mqtt-client",
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.autoSave": "onFocusChange",
+		"files.associations": {
+			"*.tcc": "cpp",
+			"algorithm": "cpp",
+			"string": "cpp",
+			"functional": "cpp"
+		}
+	}
+}
