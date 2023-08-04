@@ -37,8 +37,8 @@ public:
      * \endparblock
      */
     Metronom(int cycleDuration, bool skipMissedCycles = true) : cycleDuration(cycleDuration), skipMissedCycles(skipMissedCycles){};
-    Metronom(Metronom const &);       // Don't implement.
-    void operator=(Metronom const &); // Don't implement.
+    Metronom(Metronom const &);            // Don't implement.
+    Metronom &operator=(Metronom const &); // Don't implement.
 
     /**
      * Blocks until the next cyle starts.
