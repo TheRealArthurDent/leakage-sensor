@@ -6,6 +6,16 @@
 #include <vector>
 #include "wifi-dependent.hpp"
 
+/**
+ * \brief A controller for a WiFi connection.
+ *
+ * A singleton that will take care of your WiFi connection. It will try to
+ * establish a connection, attempt reconnects in case of a connection loss
+ * and inform registered \c WifiDependent s about successful connects as well
+ * as connection losses by calling their
+ * WifiDependent::onWifiConnectionEstablished() or
+ * WifiDependent::onWifiConnectionLost() callback respectively.
+ */
 class WifiConnection
 {
   WiFiEventHandler wifiConnectHandler;
@@ -17,6 +27,9 @@ class WifiConnection
 
   // Singleton "constructor"
 public:
+  /**
+   * Gets the \c Singleton instance.
+   */
   static auto getInstance() -> WifiConnection &
   {
     static WifiConnection instance;
@@ -34,12 +47,12 @@ private:
   // normal methods
 public:
   auto isConnected() -> bool;
-  void init();
   void init(std::list<WifiDependent *> dependents);
   // void addDependent
   // void removeDependent
 
 private:
+  void init();
   void connect();
   void setConnected(bool connected);
   void notifyDependentsConnected();
