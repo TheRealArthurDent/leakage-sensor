@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         # Add more forks here if applicable
-        repo: ['TheRealArthurDent/leakage_sensor']
+        repo: ['TheRealArthurDent/leakage-sensor']
     timeout-minutes: 5
     steps:
       - name: Dispatch to workflows
