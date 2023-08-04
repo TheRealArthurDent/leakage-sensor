@@ -6,8 +6,12 @@
 #include "wifi-connection.hpp"
 #include "ota-handler.hpp"
 #include "mqtt-client.hpp"
+#include "metronom.hpp"
 
-const int BLINK_INTERVAL = 1000;
+const int LOOP_DURATION = 2000;
+const int BLINK_INTERVAL = LOOP_DURATION / 2;
+
+Metronom metronom(LOOP_DURATION);
 
 // cppcheck-suppress unusedFunction
 void setup()
@@ -42,5 +46,9 @@ void blinkLed()
   digitalWrite(led_built_in_Node, LOW);
   delay(BLINK_INTERVAL);
   digitalWrite(led_built_in_Node, HIGH);
-  delay(BLINK_INTERVAL);
+
+  metronom.waitForNextCycle();
+
+  DEBUG_PRINT("Loop ended at: ");
+  DEBUG_PRINTLN(millis());
 }
