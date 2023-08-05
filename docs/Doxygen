@@ -3,4 +3,5 @@ INPUT            = src \
                    include \
                    docs
 INCLUDE_PATH     = include
+IMAGE_PATH       = docs/img
 OUTPUT_DIRECTORY = docs/generated

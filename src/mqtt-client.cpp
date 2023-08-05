@@ -110,3 +110,13 @@ void MqttClient::onMessage(char *topic, char *payload, AsyncMqttClientMessagePro
   strcat(testTopic, "/latestReceived");
   mqttClient.publish(testTopic, QOS_AT_MOST_ONCE, false, payload, len);
 }
+
+void MqttClient::publish(char *channel, char *payload)
+{
+  char topic[256];
+  strcpy(topic, TOPIC_BASE);
+  strcat(topic, SECRET_HOSTNAME);
+  strcat(topic, "/");
+  strcat(topic, channel);
+  mqttClient.publish(topic, QOS_AT_LEAST_ONCE, false, payload, strlen(payload));
+}

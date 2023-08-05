@@ -1,3 +1,6 @@
+# Mics
+docs/.~lock.*
+
 # IntelliJ
 .idea/
 
@@ -7,6 +10,9 @@
 .vscode/c_cpp_properties.json
 .vscode/launch.json
 .vscode/ipch
+
+# Apparently platformio decided to create thi file ...
+2
 
 # Do not push secrets files.
 **/secrets.ini
