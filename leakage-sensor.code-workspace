@@ -12,6 +12,9 @@
 			"algorithm": "cpp",
 			"string": "cpp",
 			"functional": "cpp"
-		}
+		},
+		"cSpell.words": [
+			"Iduino"
+		]
 	}
 }

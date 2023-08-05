@@ -7,7 +7,7 @@
  * measurements via this sensor. It is designed to also control the power
  * supply of the sensor via a GPIO port, but can also operate an always-on
  * sensor.
- * Since the sensor is desgined to be operated with 5V but the NodeMCU does
+ * Since the sensor is designed to be operated with 5V but the NodeMCU does
  * only deliver 3,3V, the read values will never reach 1024 (100%).
  * However that doesn't really matter, since you have to somewhat calibrate
  * it anyway.
@@ -19,7 +19,7 @@
  *
  * The results of this calibration are added to the repository
  * as a spread sheet at docs/Calibration.ods.
- * The following image shows the calibration resuls.
+ * The following image shows the calibration results.
  * \image html water-sensor-calibration.png
  * Following this result, the power-up time before a measurement is defined at
  * 100 ms. This also means that a WaterSensor configured to be powered up on
@@ -35,7 +35,7 @@ public:
      *
      * \param sensorPin
      * \parblock
-     * The GPIO pin that the sensor is connected to. Of cousrse this should be an
+     * The GPIO pin that the sensor is connected to. Of course this should be an
      * analog GPIO pin.
      * \param powerPin
      * \parblock
