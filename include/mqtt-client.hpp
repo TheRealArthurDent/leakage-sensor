@@ -34,6 +34,8 @@ public:
    */
   void onWifiConnectionLost() override;
 
+  auto publish(char *channel, char *payload) -> void;
+
 private:
   char *connectionStatusTopic;
 
