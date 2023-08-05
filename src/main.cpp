@@ -8,15 +8,14 @@
 #include "mqtt-client.hpp"
 #include "metronom.hpp"
 
-const int LOOP_DURATION = 2000;
-const int BLINK_INTERVAL = LOOP_DURATION / 2;
+const int LOOP_DURATION = 10000;
+const int BLINK_INTERVAL = 500;
 
 Metronom metronom(LOOP_DURATION);
 
 // cppcheck-suppress unusedFunction
 void setup()
 {
-
   initDebugging();
 
   pinMode(led_built_in_ESP, OUTPUT);
