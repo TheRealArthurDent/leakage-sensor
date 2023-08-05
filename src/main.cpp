@@ -10,10 +10,9 @@
 #include "water-sensor.hpp"
 
 const int LOOP_DURATION = 10000;
-const int BLINK_INTERVAL = 500;
 
-const int THRESHOLD_WATERSENSOR_1 = 300;
-const int THRESHOLD_WATERSENSOR_2 = 50;
+const int THRESHOLD_WATERSENSOR_1 = 50;
+const int THRESHOLD_WATERSENSOR_2 = 20;
 
 const int BUZZER = D5;
 
@@ -28,11 +27,6 @@ WaterSensor waterSensor2(A0, D2);
 void setup()
 {
   initDebugging();
-
-  pinMode(led_built_in_ESP, OUTPUT);
-  pinMode(led_built_in_Node, OUTPUT);
-  digitalWrite(led_built_in_Node, HIGH);
-  digitalWrite(led_built_in_ESP, HIGH);
 
   // buzzer
   pinMode(BUZZER, OUTPUT);
