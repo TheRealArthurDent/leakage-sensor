@@ -1,4 +1,4 @@
-pp - lint #pragma once
+#pragma once
 
 #define DECLARE_CLASS_AS_INTERFACE(ClassName) /* NOLINT(cppcoreguidelines-macro-usage) */                  \
 public:                                                                                                    \
