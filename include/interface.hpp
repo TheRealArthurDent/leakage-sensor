@@ -1,6 +1,6 @@
-#pragma once
+pp - lint #pragma once
 
-#define DECLARE_CLASS_AS_INTERFACE(ClassName)                                                              \
+#define DECLARE_CLASS_AS_INTERFACE(ClassName) /* NOLINT(cppcoreguidelines-macro-usage) */                  \
 public:                                                                                                    \
     virtual ~ClassName() {} /* NOLINT(bugprone-macro-parentheses) */                                       \
                                                                                                            \
