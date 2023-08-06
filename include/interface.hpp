@@ -11,4 +11,4 @@ protected:                                                        \
     ClassName(ClassName &&) noexcept {}                           \
     ClassName &operator=(ClassName &&) noexcept { return *this; } \
                                                                   \
-private:
+private: // NOLINT(cppcoreguidelines-macro-usage,bugprone-macro-parentheses,modernize-use-trailing-return-type)

@@ -13,7 +13,7 @@
  */
 class ArduinoCallable
 {
-    DECLARE_CLASS_AS_INTERFACE(ArduinoCallable);
+    DECLARE_CLASS_AS_INTERFACE(ArduinoCallable)
 
 public:
     /// @brief Arduino's <a href="https://www.arduino.cc/reference/en/language/structure/sketch/setup/">setup</a> function.

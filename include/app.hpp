@@ -16,19 +16,13 @@ class App : public ArduinoCallable
 public:
     /// @brief The default constructor.
     App();
-    ~App(){};
+    ~App() override = default;
 
     /// @brief Arduino's <a href="https://www.arduino.cc/reference/en/language/structure/sketch/setup/">setup</a> function.
-    auto setup() -> void;
+    auto setup() -> void override;
     /// @brief Arduino's <a href="https://www.arduino.cc/reference/en/language/structure/sketch/loop/">loop</a> function.
-    auto loop() -> void;
+    auto loop() -> void override;
 
 private:
-    // hide copy constructor and = operator
-    App(App const &);                // Don't implement.
-    App(App &&) noexcept;            // Don't implement.
-    void operator=(App const &);     // Don't implement.
-    void operator=(App &&) noexcept; // Don't implement.
-
     auto blinkLed() -> void;
 };
