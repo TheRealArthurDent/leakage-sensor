@@ -83,7 +83,7 @@ jobs:
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: token ${{ steps.generate-token.outputs.token }}" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            ${{ GITHUB_API_URL }}/repos/${{ GITHUB_REPOSITORY }}/pulls \
+            https://api.github.com/repos/${{ GITHUB_REPOSITORY }}/pulls \
             -d '{"title":"Merge from upstream","body":"Merge from upstream","head":"${{ GITHUB_REPOSITORY_OWNER }}:merge-upstream","base":"main"}'
               
           curl -L \
@@ -91,7 +91,7 @@ jobs:
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: token ${{ steps.generate-token.outputs.token }}" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            ${{ GITHUB_API_URL }}/repos/${{ GITHUB_REPOSITORY }}/pulls/${{ PR_NUMBER }}/requested_reviewers \
+            https://api.github.com/repos/${{ GITHUB_REPOSITORY }}/pulls/${{ PR_NUMBER }}/requested_reviewers \
             -d '{"reviewers":["TheRealArthurDent","LunaticGardener"]}'
 
         env:
