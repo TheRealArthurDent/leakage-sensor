@@ -31,7 +31,7 @@ jobs:
 
       - name: Create branch
         run: |
-          git checkout -b merge-upstream main^0 --
+          git checkout -b merge-upstream --
 
       - name: Add remote
         run: |
