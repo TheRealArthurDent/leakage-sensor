@@ -44,7 +44,8 @@ jobs:
           SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
 
-      - name: Merge and potentially create PR
+      - name: Merge upstream
+        id: merge
         run: |
           #!/bin/bash
           
@@ -58,16 +59,40 @@ jobs:
           echo ${mergeResult}
 
           if [ "${mergeResult}" == "Already up to date." ]; then
-            echo No diff, no action required.
+            echo No diff, no action required. Skipping the following steps.
+            echo "skip=true" >> "$GITHUB_OUTPUT"
           else
             git remote remove upstream
             git push --set-upstream origin +merge-upstream -v
-            if [ "$(gh pr list --search merge-upstream --json number)" == "[]" ]; then
-              gh pr create --title "Merge from upstream" --fill --reviewer TheRealArthurDent,LunaticGardener
-            else
-              echo PR already existed and has been updated.
-            fi
           fi
+
+      - name: Generate token
+        if: ${{ !steps.merge.outputs.skip }}
+        id: generate-token
+        uses: tibdex/github-app-token@v1
+        with:
+          app_id: ${{ secrets.TOKENGENERATOR_APP_ID }}
+          private_key: ${{ secrets.TOKENGENERATOR_PRIVATE_KEY }}
+
+      - name: Create Pull Request
+        if: ${{ !steps.merge.outputs.skip }}
+        id: create-pr
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          branch: merge-upstream
+          delete-branch: true
+          title: 'Merge from upstream'
+          labels: |
+            automated pr
+          assignees: |
+            TheRealArthurDent
+            LunaticGardener
+          reviewers: | 
+            TheRealArthurDent
+            LunaticGardener
+          draft: false
             
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
