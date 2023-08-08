@@ -73,6 +73,7 @@ jobs:
             echo "skip=true" >> "$GITHUB_OUTPUT"
           else
             git remote remove upstream
+            /usr/bin/git config --global --add url."https://${{ steps.generate-token.outputs.token }}:x-oauth-basic@github".insteadOf https://github
             git push --set-upstream origin +merge-upstream -v
           fi
         env: 
