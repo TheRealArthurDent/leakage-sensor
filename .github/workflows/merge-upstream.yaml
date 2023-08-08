@@ -33,16 +33,17 @@ jobs:
         run: |
           git checkout -b merge-upstream --
 
-      - name: Add remote
-        run: |
-          git remote add upstream https://github.com/${{ matrix.upstream_repo }}.git
-
       - name: Generate token
         id: generate-token
         uses: tibdex/github-app-token@v1
         with:
           app_id: ${{ secrets.PR_CREATOR_APP_ID }}
           private_key: ${{ secrets.PR_CREATOR_PRIVATE_KEY }}
+
+      - name: Add remote
+        run: |
+          git remote add upstream https://${{ steps.generate-token.outputs.token }}:x-oauth-basic@github.com/${{ matrix.upstream_repo }}.git
+          git remote set-url origin https://${{ steps.generate-token.outputs.token }}:x-oauth-basic@github.com/TheRealArthurDent/esp8266-ota-capable.git
 
       - name: Set github url and credentials
         run: |
@@ -73,7 +74,6 @@ jobs:
             echo "skip=true" >> "$GITHUB_OUTPUT"
           else
             git remote remove upstream
-            /usr/bin/git config --global --add url."https://${{ steps.generate-token.outputs.token }}:x-oauth-basic@github".insteadOf https://github
             git push --set-upstream origin +merge-upstream -v
           fi
         env: 
