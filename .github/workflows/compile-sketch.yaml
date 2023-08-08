@@ -1,7 +1,7 @@
 name: Compile Sketch
 on:
-  - push
-  - pull_request
+  push:
+  pull_request:
 
 jobs:
   build-for-esp8266:
