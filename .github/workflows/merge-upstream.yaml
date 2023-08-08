@@ -12,12 +12,12 @@ jobs:
       matrix:
         upstream_repo: ['TheRealArthurDent/esp8266-wifi-participant']
     steps:
-      - name: Setup SSH Keys and known_hosts
-        env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-        run: |
-          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-          ssh-add - <<< "${{ secrets.SSH_DEPLOY_KEY }}"
+      #- name: Setup SSH Keys and known_hosts
+      #  env:
+      #    SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+      #  run: |
+      #    ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+      #    ssh-add - <<< "${{ secrets.SSH_DEPLOY_KEY }}"
 
       - name: Checkout repository
         uses: actions/checkout@v3
