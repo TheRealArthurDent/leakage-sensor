@@ -12,12 +12,12 @@ jobs:
       matrix:
         upstream_repo: ['TheRealArthurDent/esp8266-wifi-participant']
     steps:
-      - name: Setup SSH Keys and known_hosts
-        env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-        run: |
-          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-          ssh-add - <<< "${{ secrets.SSH_DEPLOY_KEY }}"
+      #- name: Setup SSH Keys and known_hosts
+      #  env:
+      #    SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+      #  run: |
+      #    ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+      #    ssh-add - <<< "${{ secrets.SSH_DEPLOY_KEY }}"
 
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -37,19 +37,18 @@ jobs:
         run: |
           git remote add upstream git@github.com:${{ matrix.upstream_repo }}.git
 
-      - name: Fetch upstream
-        run: |
-          git fetch upstream
-        env:
-          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-
       - name: Generate token
         id: generate-token
         uses: tibdex/github-app-token@v1
         with:
           app_id: ${{ secrets.PR_CREATOR_APP_ID }}
           private_key: ${{ secrets.PR_CREATOR_PRIVATE_KEY }}
+
+      - name: Fetch upstream
+        run: |
+          git fetch upstream
+        env: 
+          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
 
       - name: Merge upstream
         id: merge
