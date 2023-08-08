@@ -35,7 +35,7 @@ jobs:
 
       - name: Add remote
         run: |
-          git remote add upstream git@github.com:${{ matrix.upstream_repo }}.git
+          git remote add upstream https://github.com:${{ matrix.upstream_repo }}.git
 
       - name: Generate token
         id: generate-token
