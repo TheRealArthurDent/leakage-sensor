@@ -5,12 +5,12 @@
 #include "debug.h"
 #include "wifi-connection.hpp"
 #include "ota-handler.hpp"
-#include "metronom.hpp"
+#include "metronome.hpp"
 
 const int LOOP_DURATION = 5000;
 const int BLINK_INTERVAL = LOOP_DURATION / 2;
 
-Metronom metronom(LOOP_DURATION);
+Metronome metronome(LOOP_DURATION);
 
 // cppcheck-suppress unusedFunction
 void setup()
@@ -42,7 +42,7 @@ void blinkLed()
   delay(BLINK_INTERVAL);
   digitalWrite(led_built_in_Node, HIGH);
 
-  metronom.waitForNextCycle();
+  metronome.waitForNextCycle();
 
   DEBUG_PRINT("Loop ended at: ");
   DEBUG_PRINTLN(millis());
