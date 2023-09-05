@@ -1,7 +1,7 @@
-#include "metronom.hpp"
+#include "metronome.hpp"
 #include <Arduino.h>
 
-void Metronom::waitForNextCycle()
+void Metronome::waitForNextCycle()
 {
     delay(cycleDuration - (millis() % cycleDuration));
 }
