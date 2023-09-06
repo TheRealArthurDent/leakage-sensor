@@ -6,7 +6,7 @@
 #include "wifi-connection.hpp"
 #include "ota-handler.hpp"
 #include "mqtt-client.hpp"
-#include "metronom.hpp"
+#include "metronome.hpp"
 #include "water-sensor.hpp"
 
 const int LOOP_DURATION = 10000;
@@ -16,7 +16,7 @@ const int THRESHOLD_WATERSENSOR_2 = 20;
 
 const int BUZZER = D5;
 
-Metronom metronom(LOOP_DURATION);
+Metronome metronome(LOOP_DURATION);
 
 MqttClient myMqttClient;
 
@@ -77,6 +77,6 @@ void loop()
     digitalWrite(BUZZER, LOW);
   }
 
-  metronom.waitForNextCycle();
+  metronome.waitForNextCycle();
   OtaHandler::getInstance().handleUpload();
 }

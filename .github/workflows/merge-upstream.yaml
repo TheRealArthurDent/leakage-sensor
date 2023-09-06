@@ -12,17 +12,25 @@ jobs:
       matrix:
         upstream_repo: ['TheRealArthurDent/esp8266-mqtt-client']
     steps:
-      - name: Setup SSH Keys and known_hosts
-        env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-        run: |
-          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-          ssh-add - <<< "${{ secrets.SSH_DEPLOY_KEY }}"
+      #- name: Setup SSH Keys and known_hosts
+      #  env:
+      #    SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+      #  run: |
+      #    ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+      #    ssh-add - <<< "${{ secrets.SSH_DEPLOY_KEY }}"
+
+      - name: Generate token
+        id: generate-token
+        uses: tibdex/github-app-token@v1
+        with:
+          app_id: ${{ secrets.PR_CREATOR_APP_ID }}
+          private_key: ${{ secrets.PR_CREATOR_PRIVATE_KEY }}
 
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+          token: ${{ steps.generate-token.outputs.token }}
 
       - name: Configure git
         run: |
@@ -31,24 +39,29 @@ jobs:
 
       - name: Create branch
         run: |
-          git checkout -b merge-upstream main^0 --
+          git checkout -b merge-upstream --
 
       - name: Add remote
         run: |
-          git remote add upstream git@github.com:${{ matrix.upstream_repo }}.git
+          git remote add upstream https://${{ steps.generate-token.outputs.token }}:x-oauth-basic@github.com/${{ matrix.upstream_repo }}.git
+          git remote set-url origin https://${{ steps.generate-token.outputs.token }}:x-oauth-basic@github.com/TheRealArthurDent/esp8266-ota-capable.git
 
+      - name: Set github url and credentials
+        run: |
+          /usr/bin/git config --global --add url."https://${{ steps.generate-token.outputs.token }}:x-oauth-basic@github".insteadOf ssh://git@github
+          /usr/bin/git config --global --add url."https://${{ steps.generate-token.outputs.token }}:x-oauth-basic@github".insteadOf https://github
+          /usr/bin/git config --global --add url."https://${{ steps.generate-token.outputs.token }}:x-oauth-basic@github".insteadOf git@github
+    
       - name: Fetch upstream
         run: |
           git fetch upstream
-        env:
-          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+        env: 
+          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
 
-      - name: Merge and potentially create PR
+      - name: Merge upstream
+        id: merge
         run: |
           #!/bin/bash
-          
-          #git merge upstream/main
           
           if ! mergeResult=$(git merge upstream/main); then
             echo Merge failed. Most likely there have been conflicts.
@@ -58,17 +71,37 @@ jobs:
           echo ${mergeResult}
 
           if [ "${mergeResult}" == "Already up to date." ]; then
-            echo No diff, no action required.
+            echo No diff, no action required. Skipping the following steps.
+            echo "skip=true" >> "$GITHUB_OUTPUT"
           else
             git remote remove upstream
             git push --set-upstream origin +merge-upstream -v
-            if [ "$(gh pr list --search merge-upstream --json number)" == "[]" ]; then
-              gh pr create --title "Merge from upstream" --fill --reviewer TheRealArthurDent,LunaticGardener
-            else
-              echo PR already existed and has been updated.
-            fi
           fi
-            
+        env: 
+          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
+
+      - name: Create Pull Request
+        if: ${{ !steps.merge.outputs.skip }}
+        id: create-pr
+        run: |
+          echo Creating pull request.
+          pr_number=$(curl -s -L \
+            -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: token ${{ steps.generate-token.outputs.token }}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            $GITHUB_API_URL/repos/$GITHUB_REPOSITORY/pulls \
+            -d '{"title":"Merge from upstream","head":"merge-upstream","base":"main"}' | jq .number)
+              
+          echo Created pull request #$pr_number. Adding reviewers.
+          curl -s -L \
+            -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: token ${{ steps.generate-token.outputs.token }}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            $GITHUB_API_URL/repos/$GITHUB_REPOSITORY/pulls/$pr_number/requested_reviewers \
+            -d '{"reviewers":["TheRealArthurDent","LunaticGardener"]}'
+
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
