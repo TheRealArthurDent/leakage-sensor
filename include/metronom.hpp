@@ -12,7 +12,6 @@
 class Metronom
 {
 public:
-    Metronom() = default;
     /**
      * \brief Constructor.
      *
@@ -37,8 +36,6 @@ public:
      * \endparblock
      */
     Metronom(int cycleDuration, bool skipMissedCycles = true) : cycleDuration(cycleDuration), skipMissedCycles(skipMissedCycles){};
-    Metronom(Metronom const &);            // Don't implement.
-    Metronom &operator=(Metronom const &); // Don't implement.
 
     /**
      * Blocks until the next cycle starts.
@@ -49,6 +46,10 @@ public:
     auto waitForNextCycle() -> void;
 
 private:
+    Metronom() = default;                  // hide default constructor
+    Metronom(Metronom const &);            // hide copy constructor
+    Metronom &operator=(Metronom const &); // hide assignment operator.
+
     int cycleDuration; //!< The duration of one cycle of the loop.
     /**
      * In case a cycle has been missed - due to stuff happening within the loop

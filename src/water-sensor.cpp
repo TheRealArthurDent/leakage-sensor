@@ -17,7 +17,7 @@ int WaterSensor::getLevel()
     if (isPoweredOnDemand())
     {
         digitalWrite(powerPin, HIGH);
-        delay(100);
+        delay(150);
     }
     int level = analogRead(sensorPin);
     if (isPoweredOnDemand())
