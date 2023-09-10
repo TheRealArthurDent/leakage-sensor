@@ -14,12 +14,12 @@ jobs:
           - esp8266:esp8266:nodemcuv2
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.0.0
       - name: Prepare Arduino IDE compatibility
         run: |
           cd scripts
           sh migrate_to_ino.sh
-      - uses: arduino/compile-sketches@v1
+      - uses: arduino/compile-sketches@v1.1.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           fqbn: ${{ matrix.fqbn }}

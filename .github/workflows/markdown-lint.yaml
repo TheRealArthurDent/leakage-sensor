@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Check out code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v4.0.0
 
     - name: markdownlint-cli
       uses: nosborn/github-action-markdown-cli@v3.3.0
