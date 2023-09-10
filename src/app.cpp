@@ -10,7 +10,7 @@
 
 #include <string>
 
-App::App() : metronome(Metronome(LOOP_DURATION)), masterCaution(MasterCaution())
+App::App() : metronome(Metronome(LOOP_DURATION)), masterCaution(MasterCaution()), mqttClient(MqttClient())
 {
 }
 
@@ -26,9 +26,8 @@ void App::setup()
     std::list<WifiDependent *> deps;
     deps.push_back(&OtaHandler::getInstance());
 
-    MqttClient *mqttClient = new MqttClient();
-    mqttClient->init();
-    deps.push_back(mqttClient);
+    mqttClient.init();
+    deps.push_back(&mqttClient);
 
     WifiConnection::getInstance().init(deps);
 }
