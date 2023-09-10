@@ -21,13 +21,13 @@ jobs:
 
       - name: Generate token
         id: generate-token
-        uses: tibdex/github-app-token@v2
+        uses: tibdex/github-app-token@v2.0.0
         with:
           app_id: ${{ secrets.PR_CREATOR_APP_ID }}
           private_key: ${{ secrets.PR_CREATOR_PRIVATE_KEY }}
 
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.0.0
         with:
           fetch-depth: 0
           token: ${{ steps.generate-token.outputs.token }}
