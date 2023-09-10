@@ -11,9 +11,6 @@ const std::string ALL_GOOD = "All good.";
 
 class Alert
 {
-    // DECLARE_CLASS_AS_INTERFACE(Alert) // It's not exactly an interface but an
-    //   abstract class which is pretty much the same thing in c++ anyway.
-
 private:
     std::string name;
     bool active;
@@ -24,7 +21,6 @@ public:
     Alert(std::string name);
     Alert(std::string name, Alertable *alertable);
     // Alert(std::string name, std::list<Alertable *> alertables);
-    Alert(Alert *alert);
 
     auto addAlertable(Alertable *alertable) -> Alertable *;
     auto removeAlertable(Alertable *alertable) -> Alertable *;

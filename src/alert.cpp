@@ -11,13 +11,6 @@ Alert::Alert(std::string name) : name(name), active(false), message(ALL_GOOD), a
 Alert::Alert(std::string name, Alertable *alertable) : Alert(name)
 {
     addAlertable(alertable);
-    //    if (std::find(alertables.begin(), alertables.end(), alertable) == alertables.end())
-    //    {
-    //        DEBUG_PRINT("new Alert - alertable: ");
-    //        DEBUG_PRINTLN((alertable == 0) ? "NULL" : "NOT NULL");
-    //        alertables.push_back(alertable);
-    //        alertable->addAlert(this);
-    //    }
 }
 
 // Alert::Alert(std::string name, std::list<Alertable *> alertable = std::list<Alertable *>(0))
@@ -26,17 +19,6 @@ Alert::Alert(std::string name, Alertable *alertable) : Alert(name)
 //     std::for_each(alertable.begin(), alertable.end(), [this](Alertable *d)
 //                   { alertables.push_back(d); });
 // }
-
-Alert::Alert(Alert *alert)
-{
-    DEBUG_PRINT("Copying Alert ");
-    DEBUG_PRINTLN(alert->getName().c_str());
-    this->name.assign(alert->name);
-    this->active = alert->active;
-    this->message.assign(alert->message);
-    this->alertables = std::vector<Alertable *>(0);
-    std::copy(alert->alertables.begin(), alert->alertables.end(), back_inserter(this->alertables));
-}
 
 Alertable *Alert::addAlertable(Alertable *alertable)
 {
