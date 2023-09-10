@@ -2,6 +2,18 @@
 
 #include "wifi-dependent.hpp"
 #include <AsyncMqttClient.hpp>
+#include <string>
+
+/// Quality of service enum for MQTT messaging.
+enum Qos
+{
+  /// @brief QoS - At most once.
+  AT_MOST_ONCE = 0,
+  /// @brief QoS - At least once.
+  AT_LEAST_ONCE = 1,
+  /// @brief QoS - Exactly once.
+  EXACTLY_ONCE = 2,
+};
 
 /**
  * \brief A very basic MQTT client.
@@ -9,10 +21,12 @@
  * This fella just showcases the use of marvinroger's
  * <a href="https://github.com/marvinroger/async-mqtt-client">Async MQTT
  * client for ESP8266 and ESP32</a>.
- * Extend it to build more sophistcated stuff.
+ * Extend it to build more sophisticated stuff.
  */
 class MqttClient : public WifiDependent
 {
+  std::string TOPIC_BASE = "subscribers/";
+  std::string TOPIC_CONNECTION_STATUS = "/connection-status";
 
 public:
   /**
@@ -37,7 +51,7 @@ public:
   auto publish(char *channel, char *payload) -> void;
 
 private:
-  char *connectionStatusTopic;
+  std::string connectionStatusTopic;
 
   void connect();
   /**

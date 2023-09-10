@@ -3,6 +3,7 @@
 #include "arduino-callable.hpp"
 #include "metronome.hpp"
 #include "master-caution.hpp"
+#include "mqtt-client.hpp"
 
 const int LOOP_DURATION = 2000;
 const int BLINK_INTERVAL = LOOP_DURATION / 2;
@@ -14,6 +15,7 @@ class App : public ArduinoCallable
 {
     Metronome metronome;
     MasterCaution masterCaution;
+    MqttClient mqttClient;
 
 public:
     /// @brief The default constructor.

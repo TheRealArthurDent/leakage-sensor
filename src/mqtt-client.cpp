@@ -4,24 +4,14 @@
 #include <AsyncMqttClient.hpp>
 #include <Ticker.h>
 
-const int QOS_AT_MOST_ONCE = 0;
-const int QOS_AT_LEAST_ONCE = 1;
-const int QOS_EXACTLY_ONCE = 2;
-
-const char *TOPIC_BASE = "subscribers/";
-const char *TOPIC_CONNECTION_STATUS = "/connection-status";
-
 AsyncMqttClient mqttClient;
 Ticker mqttReconnectTimer;
 
 void MqttClient::init()
 {
-  connectionStatusTopic = new char[strlen(TOPIC_BASE) + strlen(SECRET_HOSTNAME) + strlen(TOPIC_CONNECTION_STATUS)];
+  connectionStatusTopic = TOPIC_BASE + SECRET_HOSTNAME + TOPIC_CONNECTION_STATUS;
 
-  strcpy(connectionStatusTopic, TOPIC_BASE);
-  strcat(connectionStatusTopic, SECRET_HOSTNAME);
-  strcat(connectionStatusTopic, TOPIC_CONNECTION_STATUS);
-  mqttClient.setWill(connectionStatusTopic, QOS_AT_LEAST_ONCE, true, "DISCONNECTED");
+  mqttClient.setWill(connectionStatusTopic.c_str(), AT_LEAST_ONCE, true, "DISCONNECTED");
 
   // mqttClient.onConnect(onConnect);
   mqttClient.onConnect([this](bool sessionPresent)
@@ -67,7 +57,7 @@ void MqttClient::onConnect(bool sessionPresent)
   DEBUG_PRINT("Session present: ");
   DEBUG_PRINTLN(sessionPresent);
 
-  mqttClient.publish(connectionStatusTopic, QOS_AT_LEAST_ONCE, true, "CONNECTED");
+  mqttClient.publish(connectionStatusTopic.c_str(), AT_LEAST_ONCE, true, "CONNECTED");
 
   mqttClient.subscribe("mqttclient/test", 2);
 }
@@ -104,11 +94,8 @@ void MqttClient::onMessage(char *topic, char *payload, AsyncMqttClientMessagePro
   DEBUG_PRINT("  total: ");
   DEBUG_PRINTLN(total);
 
-  char testTopic[80];
-  strcpy(testTopic, TOPIC_BASE);
-  strcat(testTopic, SECRET_HOSTNAME);
-  strcat(testTopic, "/latestReceived");
-  mqttClient.publish(testTopic, QOS_AT_MOST_ONCE, false, payload, len);
+  std::string testTopic = TOPIC_BASE + SECRET_HOSTNAME + "/latestReceived";
+  mqttClient.publish(testTopic.c_str(), AT_MOST_ONCE, false, payload, len);
 }
 
 void MqttClient::publish(char *channel, char *payload)
