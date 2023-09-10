@@ -4,8 +4,12 @@
 #include "led.h"
 #include "wifi-connection.hpp"
 #include "dummy-wifi-dependent.hpp"
+#include "alert.hpp"
+#include "debug.h"
 
-App::App() : metronome(Metronome(LOOP_DURATION))
+#include <string>
+
+App::App() : metronome(Metronome(LOOP_DURATION)), masterCaution(MasterCaution())
 {
 }
 
@@ -18,12 +22,9 @@ void App::setup()
     digitalWrite(led_built_in_Node, HIGH);
     digitalWrite(led_built_in_ESP, HIGH);
 
-    DummyWifiDependent dependent1;
-    DummyWifiDependent dependent2;
-
     std::list<WifiDependent *> deps;
-    deps.push_back(&dependent1);
-    deps.push_back(&dependent2);
+    deps.push_back(new DummyWifiDependent(new Alert(std::string("DummyWifiDependent1"), &masterCaution)));
+    deps.push_back(new DummyWifiDependent(new Alert(std::string("DummyWifiDependent2"), &masterCaution)));
 
     WifiConnection::getInstance().init(deps);
 }
@@ -40,6 +41,15 @@ void App::blinkLed()
     digitalWrite(led_built_in_Node, HIGH);
 
     metronome.waitForNextCycle();
+
+    if (masterCaution.isAlarming())
+    {
+        DEBUG_PRINTLN("!!! MASTER CAUTION !!!");
+        std::vector<Alert *> activeAlerts = masterCaution.getActiveAlerts();
+        std::for_each(activeAlerts.begin(), activeAlerts.end(), [this](Alert *a)
+                      { DEBUG_PRINT("!! CAUTION: "); DEBUG_PRINTLN(a->toString().c_str()); });
+        DEBUG_PRINTLN("!!! MASTER CAUTION !!!");
+    }
 
     DEBUG_PRINT("Loop ended at: ");
     DEBUG_PRINTLN(millis());

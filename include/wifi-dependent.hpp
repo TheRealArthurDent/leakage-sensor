@@ -26,5 +26,5 @@ public:
    * Callback function that will be called by the WiFi connection's controller
    * in case a connection has been lost.
    */
-  virtual void onWifiConnectionLost() {}
+  virtual void onWifiConnectionLost() {};
 };

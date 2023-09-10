@@ -2,6 +2,7 @@
 
 #include "arduino-callable.hpp"
 #include "metronome.hpp"
+#include "master-caution.hpp"
 
 const int LOOP_DURATION = 5000;
 const int BLINK_INTERVAL = LOOP_DURATION / 2;
@@ -12,6 +13,7 @@ const int BLINK_INTERVAL = LOOP_DURATION / 2;
 class App : public ArduinoCallable
 {
     Metronome metronome;
+    MasterCaution masterCaution;
 
 public:
     /// @brief The default constructor.
