@@ -4,6 +4,7 @@
 #include "led.h"
 #include "wifi-connection.hpp"
 #include "ota-handler.hpp"
+#include "mqtt-client.hpp"
 #include "alert.hpp"
 #include "debug.h"
 
@@ -24,6 +25,10 @@ void App::setup()
 
     std::list<WifiDependent *> deps;
     deps.push_back(&OtaHandler::getInstance());
+
+    MqttClient *mqttClient = new MqttClient();
+    mqttClient->init();
+    deps.push_back(mqttClient);
 
     WifiConnection::getInstance().init(deps);
 }

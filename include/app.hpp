@@ -4,7 +4,7 @@
 #include "metronome.hpp"
 #include "master-caution.hpp"
 
-const int LOOP_DURATION = 5000;
+const int LOOP_DURATION = 2000;
 const int BLINK_INTERVAL = LOOP_DURATION / 2;
 
 /**

@@ -10,10 +10,6 @@ void setup()
 {
   delegate = new App();
   delegate->setup();
-
-  //MqttClient mqttClient;
-  //mqttClient.init();
-  //deps.push_back(&mqttClient);
 }
 
 // cppcheck-suppress unusedFunction
