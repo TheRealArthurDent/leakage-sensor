@@ -10,12 +10,10 @@ void setup()
 {
   delegate = new App();
   delegate->setup();
-  //deps.push_back(&OtaHandler::getInstance());
 }
 
 // cppcheck-suppress unusedFunction
 void loop()
 {
   delegate->loop();
-  //OtaHandler::getInstance().handleUpload();
 }

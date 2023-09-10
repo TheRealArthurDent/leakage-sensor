@@ -3,7 +3,7 @@
 #include "Arduino.h"
 #include "led.h"
 #include "wifi-connection.hpp"
-#include "dummy-wifi-dependent.hpp"
+#include "ota-handler.hpp"
 #include "alert.hpp"
 #include "debug.h"
 
@@ -23,8 +23,7 @@ void App::setup()
     digitalWrite(led_built_in_ESP, HIGH);
 
     std::list<WifiDependent *> deps;
-    deps.push_back(new DummyWifiDependent(new Alert(std::string("DummyWifiDependent1"), &masterCaution)));
-    deps.push_back(new DummyWifiDependent(new Alert(std::string("DummyWifiDependent2"), &masterCaution)));
+    deps.push_back(&OtaHandler::getInstance());
 
     WifiConnection::getInstance().init(deps);
 }
@@ -32,6 +31,7 @@ void App::setup()
 void App::loop()
 {
     blinkLed();
+    OtaHandler::getInstance().handleUpload();
 }
 
 void App::blinkLed()
