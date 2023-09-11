@@ -2,6 +2,7 @@
 
 #include "wifi-dependent.hpp"
 #include <AsyncMqttClient.hpp>
+#include <Ticker.h>
 #include <string>
 
 /// Quality of service enum for MQTT messaging.
@@ -25,10 +26,18 @@ enum Qos
  */
 class MqttClient : public WifiDependent
 {
+private:
+  AsyncMqttClient mqttClient;
+  Ticker mqttReconnectTimer;
+
   std::string TOPIC_BASE = "subscribers/";
   std::string TOPIC_CONNECTION_STATUS = "/connection-status";
+  std::string connectionStatusTopic;
 
 public:
+  MqttClient() : mqttClient(AsyncMqttClient()),
+                 mqttReconnectTimer(Ticker()),
+                 connectionStatusTopic(TOPIC_BASE + SECRET_HOSTNAME + TOPIC_CONNECTION_STATUS){};
   /**
    * Initializes the async-mqtt-client.
    */
@@ -49,8 +58,6 @@ public:
   void onWifiConnectionLost() override;
 
 private:
-  std::string connectionStatusTopic;
-
   void connect();
   /**
    * Is called by async-mqtt-client once a connection to the MQTT

@@ -1,16 +1,9 @@
 #include "mqtt-client.hpp"
 #include "debug.h"
 #include "wifi-connection.hpp"
-#include <AsyncMqttClient.hpp>
-#include <Ticker.h>
-
-AsyncMqttClient mqttClient;
-Ticker mqttReconnectTimer;
 
 void MqttClient::init()
 {
-  connectionStatusTopic = TOPIC_BASE + SECRET_HOSTNAME + TOPIC_CONNECTION_STATUS;
-
   mqttClient.setWill(connectionStatusTopic.c_str(), AT_LEAST_ONCE, true, "DISCONNECTED");
 
   // mqttClient.onConnect(onConnect);
