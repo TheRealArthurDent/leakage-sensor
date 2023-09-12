@@ -1,16 +1,9 @@
 #include "mqtt-client.hpp"
 #include "debug.h"
 #include "wifi-connection.hpp"
-#include <AsyncMqttClient.hpp>
-#include <Ticker.h>
-
-AsyncMqttClient mqttClient;
-Ticker mqttReconnectTimer;
 
 void MqttClient::init()
 {
-  connectionStatusTopic = TOPIC_BASE + SECRET_HOSTNAME + TOPIC_CONNECTION_STATUS;
-
   mqttClient.setWill(connectionStatusTopic.c_str(), AT_LEAST_ONCE, true, "DISCONNECTED");
 
   // mqttClient.onConnect(onConnect);
@@ -53,6 +46,7 @@ void MqttClient::onWifiConnectionLost()
 
 void MqttClient::onConnect(bool sessionPresent)
 {
+  connected = true;
   DEBUG_PRINT("Connected to MQTT. ");
   DEBUG_PRINT("Session present: ");
   DEBUG_PRINTLN(sessionPresent);
@@ -62,6 +56,7 @@ void MqttClient::onConnect(bool sessionPresent)
 
 void MqttClient::onDisconnect(AsyncMqttClientDisconnectReason reason)
 {
+  connected = false;
   DEBUG_PRINTLN("Disconnected from MQTT.");
 
   if (WifiConnection::getInstance().isConnected())
@@ -93,7 +88,16 @@ void MqttClient::onMessage(char *topic, char *payload, AsyncMqttClientMessagePro
   DEBUG_PRINTLN(total);
 }
 
-void MqttClient::publish(std::string topic, std::string payload)
+bool MqttClient::isConnected()
 {
-  mqttClient.publish(topic.c_str(), AT_LEAST_ONCE, false, payload.c_str(), payload.size());
+  return connected;
+}
+
+bool MqttClient::publish(std::string topic, std::string payload, Qos qos, bool retain)
+{
+  if (!connected)
+  {
+    return false;
+  }
+  return 0 != mqttClient.publish(topic.c_str(), qos, retain, payload.c_str(), payload.size());
 }
