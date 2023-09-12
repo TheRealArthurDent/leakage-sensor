@@ -48,7 +48,7 @@ public:
    */
   void onWifiConnectionLost() override;
 
-  auto publish(char *channel, char *payload) -> void;
+  auto publish(std::string topic, std::string payload) -> void;
 
 private:
   std::string connectionStatusTopic;

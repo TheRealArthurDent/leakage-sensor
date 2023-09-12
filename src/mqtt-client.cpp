@@ -58,8 +58,6 @@ void MqttClient::onConnect(bool sessionPresent)
   DEBUG_PRINTLN(sessionPresent);
 
   mqttClient.publish(connectionStatusTopic.c_str(), AT_LEAST_ONCE, true, "CONNECTED");
-
-  mqttClient.subscribe("mqttclient/test", 2);
 }
 
 void MqttClient::onDisconnect(AsyncMqttClientDisconnectReason reason)
@@ -93,17 +91,9 @@ void MqttClient::onMessage(char *topic, char *payload, AsyncMqttClientMessagePro
   DEBUG_PRINTLN(index);
   DEBUG_PRINT("  total: ");
   DEBUG_PRINTLN(total);
-
-  std::string testTopic = TOPIC_BASE + SECRET_HOSTNAME + "/latestReceived";
-  mqttClient.publish(testTopic.c_str(), AT_MOST_ONCE, false, payload, len);
 }
 
-void MqttClient::publish(char *channel, char *payload)
+void MqttClient::publish(std::string topic, std::string payload)
 {
-  char topic[256];
-  strcpy(topic, TOPIC_BASE);
-  strcat(topic, SECRET_HOSTNAME);
-  strcat(topic, "/");
-  strcat(topic, channel);
-  mqttClient.publish(topic, QOS_AT_LEAST_ONCE, false, payload, strlen(payload));
+  mqttClient.publish(topic.c_str(), AT_LEAST_ONCE, false, payload.c_str(), payload.size());
 }
