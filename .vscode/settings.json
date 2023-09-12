@@ -4,5 +4,8 @@
         "unordered_map": "cpp",
         "numeric": "cpp",
         "ostream": "cpp"
-    }
+    },
+    "cSpell.words": [
+        "Mqtt"
+    ]
 }

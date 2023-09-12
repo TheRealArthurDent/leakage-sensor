@@ -46,6 +46,7 @@ void MqttClient::onWifiConnectionLost()
 
 void MqttClient::onConnect(bool sessionPresent)
 {
+  connected = true;
   DEBUG_PRINT("Connected to MQTT. ");
   DEBUG_PRINT("Session present: ");
   DEBUG_PRINTLN(sessionPresent);
@@ -57,6 +58,7 @@ void MqttClient::onConnect(bool sessionPresent)
 
 void MqttClient::onDisconnect(AsyncMqttClientDisconnectReason reason)
 {
+  connected = false;
   DEBUG_PRINTLN("Disconnected from MQTT.");
 
   if (WifiConnection::getInstance().isConnected())
@@ -88,5 +90,19 @@ void MqttClient::onMessage(char *topic, char *payload, AsyncMqttClientMessagePro
   DEBUG_PRINTLN(total);
 
   std::string testTopic = TOPIC_BASE + SECRET_HOSTNAME + "/latestReceived";
-  mqttClient.publish(testTopic.c_str(), AT_MOST_ONCE, false, payload, len);
+  publish(testTopic, payload);
+}
+
+bool MqttClient::isConnected()
+{
+  return connected;
+}
+
+bool MqttClient::publish(std::string topic, std::string payload, Qos qos, bool retain)
+{
+  if (!connected)
+  {
+    return false;
+  }
+  return 0 != mqttClient.publish(topic.c_str(), qos, retain, payload.c_str(), payload.size());
 }

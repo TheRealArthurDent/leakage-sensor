@@ -5,7 +5,10 @@
 #include <Ticker.h>
 #include <string>
 
-/// Quality of service enum for MQTT messaging.
+/**
+ * <a href="https://www.hivemq.com/blog/mqtt-essentials-part-6-mqtt-quality-of-service-levels/">
+ * Quality of service</a> enum for MQTT messaging.
+ */
 enum Qos
 {
   /// @brief QoS - At most once.
@@ -27,6 +30,7 @@ enum Qos
 class MqttClient : public WifiDependent
 {
 private:
+  bool connected = false;
   AsyncMqttClient mqttClient;
   Ticker mqttReconnectTimer;
 
@@ -56,6 +60,25 @@ public:
    * to handle this within this controller.
    */
   void onWifiConnectionLost() override;
+
+  /**
+   * Returns whether the client is connected to the specified MQTT broker.
+   */
+  auto isConnected() -> bool;
+
+  /**
+   * Publishes a payload to the specified topic.
+   *
+   * \param topic The MQTT topic to publish the content to.
+   * \param payload The content to publish.
+   * \param qos <a href="https://www.hivemq.com/blog/mqtt-essentials-part-6-mqtt-quality-of-service-levels/">
+   * MQTT's Quality of service level</a> .
+   * \param retain <a href="https://www.hivemq.com/blog/mqtt-essentials-part-8-retained-messages/">
+   * MQTT's retain flag</a>.
+   *
+   * \returns \c true if the message was successfully published, otherwise \c false.
+   */
+  auto publish(std::string topic, std::string payload, Qos qos = AT_LEAST_ONCE, bool retain = false) -> bool;
 
 private:
   void connect();
