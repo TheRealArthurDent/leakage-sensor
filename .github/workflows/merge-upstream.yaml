@@ -44,7 +44,7 @@ jobs:
       - name: Add remote
         run: |
           git remote add upstream https://${{ steps.generate-token.outputs.token }}:x-oauth-basic@github.com/${{ matrix.upstream_repo }}.git
-          git remote set-url origin https://${{ steps.generate-token.outputs.token }}:x-oauth-basic@github.com/TheRealArthurDent/esp8266-ota-capable.git
+          git remote set-url origin https://${{ steps.generate-token.outputs.token }}:x-oauth-basic@github.com/TheRealArthurDent/leakage-sensor.git
 
       - name: Set github url and credentials
         run: |
