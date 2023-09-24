@@ -12,16 +12,9 @@ jobs:
       matrix:
         upstream_repo: ['TheRealArthurDent/esp8266-ota-capable']
     steps:
-      #- name: Setup SSH Keys and known_hosts
-      #  env:
-      #    SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-      #  run: |
-      #    ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-      #    ssh-add - <<< "${{ secrets.SSH_DEPLOY_KEY }}"
-
       - name: Generate token
         id: generate-token
-        uses: tibdex/github-app-token@v2.0.0
+        uses: tibdex/github-app-token@v2.1.0
         with:
           app_id: ${{ secrets.PR_CREATOR_APP_ID }}
           private_key: ${{ secrets.PR_CREATOR_PRIVATE_KEY }}
