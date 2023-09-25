@@ -24,11 +24,6 @@ void App::setup()
 {
     initDebugging();
 
-    // pinMode(led_built_in_ESP, OUTPUT);
-    // pinMode(led_built_in_Node, OUTPUT);
-    // digitalWrite(led_built_in_Node, HIGH);
-    // digitalWrite(led_built_in_ESP, HIGH);
-
     // buzzer
     pinMode(BUZZER, OUTPUT);
 
@@ -47,7 +42,10 @@ void App::setup()
 
 void App::loop()
 {
-    // TODO
+    // switch off RGB LED before reading
+    analogWrite(RGB_LED_GREEN, 0);
+    analogWrite(RGB_LED_RED, 0);
+
     // measure
     int waterLevel = waterLevelSensor.getLevel();
     mqttClient.publish("leakageSensor/waterLevel/rawValue", std::to_string(waterLevel));
@@ -90,16 +88,18 @@ void App::loop()
         analogWrite(RGB_LED_GREEN, 0);
         analogWrite(RGB_LED_RED, 255);
 
+        /*
         // BUZZER
         digitalWrite(BUZZER, HIGH);
         delay(2000);
         digitalWrite(BUZZER, LOW);
+        */
     }
     else if (masterCaution.isAcknowledged())
     {
         // RGB LED YELLOW
-        analogWrite(RGB_LED_GREEN, 100);
-        analogWrite(RGB_LED_RED, 100);
+        analogWrite(RGB_LED_GREEN, 20);
+        analogWrite(RGB_LED_RED, 255);
     }
     else
     {
@@ -110,4 +110,12 @@ void App::loop()
 
     metronome.waitForNextCycle();
     OtaHandler::getInstance().handleUpload();
+}
+
+void App::acknowledge()
+{
+    masterCaution.acknowledge();
+    // RGB LED YELLOW
+    analogWrite(RGB_LED_GREEN, 100);
+    analogWrite(RGB_LED_RED, 200);
 }

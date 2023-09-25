@@ -11,7 +11,7 @@ const int LOOP_DURATION = 10000;
 const int BLINK_INTERVAL = LOOP_DURATION / 2;
 
 const int THRESHOLD_WATERLEVEL = 50;
-const int THRESHOLD_LEAKAGE = 20;
+const int THRESHOLD_LEAKAGE = 40;
 
 const int BUZZER = D5;
 
@@ -42,4 +42,6 @@ public:
     auto setup() -> void override;
     /// @brief Arduino's <a href="https://www.arduino.cc/reference/en/language/structure/sketch/loop/">loop</a> function.
     auto loop() -> void override;
+
+    auto acknowledge() -> void;
 };
