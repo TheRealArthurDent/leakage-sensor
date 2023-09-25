@@ -37,7 +37,7 @@ jobs:
       - name: Add remote
         run: |
           git remote add upstream https://${{ steps.generate-token.outputs.token }}:x-oauth-basic@github.com/${{ matrix.upstream_repo }}.git
-          git remote set-url origin https://${{ steps.generate-token.outputs.token }}:x-oauth-basic@github.com/TheRealArthurDent/esp8266-ota-capable.git
+          git remote set-url origin https://${{ steps.generate-token.outputs.token }}:x-oauth-basic@github.com/TheRealArthurDent/esp8266-mqtt-client.git
 
       - name: Set github url and credentials
         run: |
@@ -48,8 +48,7 @@ jobs:
       - name: Fetch upstream
         run: |
           git fetch upstream
-          git remote remove upstream
-        env:
+        env: 
           GITHUB_TOKEN: ${{ steps.generate-token.outputs.token }}
 
       - name: Merge upstream
@@ -68,6 +67,7 @@ jobs:
             echo No diff, no action required. Skipping the following steps.
             echo "skip=true" >> "$GITHUB_OUTPUT"
           else
+            git remote remove upstream
             git push --set-upstream origin +merge-upstream -v
           fi
         env: 
