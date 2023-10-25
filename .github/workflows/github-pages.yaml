@@ -16,7 +16,7 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}
 
     steps:
-      - uses: actions/checkout@v4.1.0
+      - uses: actions/checkout@v4.1.1
 
       - name: Doxygen
         uses: mattnotmitt/doxygen-action@v1.9.5
