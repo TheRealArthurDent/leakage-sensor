@@ -3,5 +3,5 @@
 
 void Metronome::waitForNextCycle()
 {
-    delay(cycleDuration - (millis() % cycleDuration));
+  delay(cycleDuration - (millis() % cycleDuration));
 }
