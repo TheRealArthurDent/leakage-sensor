@@ -1,13 +1,15 @@
 name: Compile Sketch
 on:
   push:
+    branches:
+      - main
   pull_request:
 
 jobs:
   build-for-esp8266:
     name: ${{ matrix.board.fqbn }}
     runs-on: ubuntu-latest
-    
+
     strategy:
       matrix:
         fqbn:
