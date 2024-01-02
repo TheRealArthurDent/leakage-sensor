@@ -1,6 +1,6 @@
 name: CPP Lint
 
-on: 
+on:
   pull_request:
     branches-ignore:
       - main
