@@ -30,44 +30,44 @@
 class WaterSensor
 {
 public:
-    /**
-     * \brief Constructor.
-     *
-     * \param sensorPin
-     * \parblock
-     * The GPIO pin that the sensor is connected to. Of course this should be an
-     * analog GPIO pin.
-     * \param powerPin
-     * \parblock
-     * [OPTIONAL] The GPIO pin that controls the power of the sensor.
-     * It is highly recommended to control the power supply of your sensor, as it
-     * will wear quicker when constantly powered. In case you don't have a free
-     * GPIO port available, you can still go with constant power and omit this
-     * value.
-     * If a powerPin is specified, the controller will power the sensor on demand
-     * (when ever getLevel is called).
-     */
-    WaterSensor(int sensorPin, int powerPin = -1);
-    WaterSensor(WaterSensor const &);            // Don't implement.
-    WaterSensor &operator=(WaterSensor const &); // Don't implement.
+  /**
+   * \brief Constructor.
+   *
+   * \param sensorPin
+   * \parblock
+   * The GPIO pin that the sensor is connected to. Of course this should be an
+   * analog GPIO pin.
+   * \param powerPin
+   * \parblock
+   * [OPTIONAL] The GPIO pin that controls the power of the sensor.
+   * It is highly recommended to control the power supply of your sensor, as it
+   * will wear quicker when constantly powered. In case you don't have a free
+   * GPIO port available, you can still go with constant power and omit this
+   * value.
+   * If a powerPin is specified, the controller will power the sensor on demand
+   * (when ever getLevel is called).
+   */
+  WaterSensor(int sensorPin, int powerPin = -1);
+  WaterSensor(WaterSensor const &);            // Don't implement.
+  WaterSensor &operator=(WaterSensor const &); // Don't implement.
 
-    /**
-     * \brief Measures and returns the current water level.
-     *
-     * In case a powerPin has been specified, the method will return a value
-     * after ~100 ms, as this is the time the sensor will be powered up,
-     * before performing the analog read.
-     * If the sample rate you are looking for requires a lower value, you
-     * might wanna NOT specify a powerPin and power your sensor constantly.
-     * In the latter case, the method will return a value (almost) immediately.
-     *
-     * \return The current water level.
-     */
-    auto getLevel() -> int;
+  /**
+   * \brief Measures and returns the current water level.
+   *
+   * In case a powerPin has been specified, the method will return a value
+   * after ~100 ms, as this is the time the sensor will be powered up,
+   * before performing the analog read.
+   * If the sample rate you are looking for requires a lower value, you
+   * might wanna NOT specify a powerPin and power your sensor constantly.
+   * In the latter case, the method will return a value (almost) immediately.
+   *
+   * \return The current water level.
+   */
+  auto getLevel() -> int;
 
 private:
-    int sensorPin;
-    int powerPin;
+  int sensorPin;
+  int powerPin;
 
-    auto isPoweredOnDemand() -> bool;
+  auto isPoweredOnDemand() -> bool;
 };
