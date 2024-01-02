@@ -1,5 +1,5 @@
 /**
-\mainpage 
+\mainpage
 A tiny sample project that is based on esp8266-wifi-participant
 but is updatable over-the-air.
 On startup your board will try to connect to the specified WiFi network and will
