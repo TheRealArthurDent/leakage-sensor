@@ -1,9 +1,6 @@
 name: CPP Lint
 
-on: 
-  push:
-    branches-ignore:
-      - main
+on:
   pull_request:
     branches-ignore:
       - main
