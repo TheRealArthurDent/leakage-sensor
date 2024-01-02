@@ -1,5 +1,5 @@
 /**
-\mainpage 
+\mainpage
 A tiny sample project that makes your ESP8266 a client of an MQTT broker via
 WiFi connection.
 
