@@ -81,17 +81,17 @@ $(function() {
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="classWaterSensor.html">   30</a></span><span class="keyword">class </span><a class="code hl_class" href="classWaterSensor.html">WaterSensor</a></div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>{</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <a class="code hl_class" href="classWaterSensor.html">WaterSensor</a>(<span class="keywordtype">int</span> sensorPin, <span class="keywordtype">int</span> powerPin = -1);</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <a class="code hl_class" href="classWaterSensor.html">WaterSensor</a>(<a class="code hl_class" href="classWaterSensor.html">WaterSensor</a> <span class="keyword">const</span> &amp;);            <span class="comment">// Don&#39;t implement.</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <a class="code hl_class" href="classWaterSensor.html">WaterSensor</a> &amp;operator=(<a class="code hl_class" href="classWaterSensor.html">WaterSensor</a> <span class="keyword">const</span> &amp;); <span class="comment">// Don&#39;t implement.</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  <a class="code hl_class" href="classWaterSensor.html">WaterSensor</a>(<span class="keywordtype">int</span> sensorPin, <span class="keywordtype">int</span> powerPin = -1);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  <a class="code hl_class" href="classWaterSensor.html">WaterSensor</a>(<a class="code hl_class" href="classWaterSensor.html">WaterSensor</a> <span class="keyword">const</span> &amp;);            <span class="comment">// Don&#39;t implement.</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  <a class="code hl_class" href="classWaterSensor.html">WaterSensor</a> &amp;operator=(<a class="code hl_class" href="classWaterSensor.html">WaterSensor</a> <span class="keyword">const</span> &amp;); <span class="comment">// Don&#39;t implement.</span></div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keyword">auto</span> <a class="code hl_function" href="classWaterSensor.html#a755c16bd398c2a234590bff4ca478b89">getLevel</a>() -&gt; int;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  <span class="keyword">auto</span> <a class="code hl_function" href="classWaterSensor.html#a755c16bd398c2a234590bff4ca478b89">getLevel</a>() -&gt; int;</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordtype">int</span> sensorPin;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordtype">int</span> powerPin;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="keywordtype">int</span> sensorPin;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  <span class="keywordtype">int</span> powerPin;</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keyword">auto</span> isPoweredOnDemand() -&gt; bool;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  <span class="keyword">auto</span> isPoweredOnDemand() -&gt; bool;</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>};</div>
 <div class="ttc" id="aclassWaterSensor_html"><div class="ttname"><a href="classWaterSensor.html">WaterSensor</a></div><div class="ttdoc">Gets values from an Iduino SE045 water sensor.</div><div class="ttdef"><b>Definition:</b> water-sensor.hpp:31</div></div>
 <div class="ttc" id="aclassWaterSensor_html_a755c16bd398c2a234590bff4ca478b89"><div class="ttname"><a href="classWaterSensor.html#a755c16bd398c2a234590bff4ca478b89">WaterSensor::getLevel</a></div><div class="ttdeci">auto getLevel() -&gt; int</div><div class="ttdoc">Measures and returns the current water level.</div><div class="ttdef"><b>Definition:</b> water-sensor.cpp:15</div></div>
