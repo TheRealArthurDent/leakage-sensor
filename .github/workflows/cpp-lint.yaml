@@ -2,8 +2,6 @@ name: CPP Lint
 
 on:
   pull_request:
-    branches-ignore:
-      - main
 
 jobs:
   cpp-lint:
