@@ -1,6 +1,6 @@
 name: CPP Lint Full
 
-on: 
+on:
   push:
     branches:
       - main
