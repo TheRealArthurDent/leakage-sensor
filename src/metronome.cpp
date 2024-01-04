@@ -1,5 +1,5 @@
-#include "metronome.hpp"
 #include <Arduino.h>
+#include "metronome.hpp"
 
 void Metronome::waitForNextCycle()
 {
