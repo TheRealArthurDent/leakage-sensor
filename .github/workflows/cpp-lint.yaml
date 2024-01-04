@@ -2,6 +2,7 @@ name: CPP Lint
 
 on:
   pull_request:
+  workflow_dispatch:
 
 jobs:
   cpp-lint:
@@ -17,6 +18,7 @@ jobs:
       with:
         style: file
         thread-comments: true
+        extra-args: -Iinclude/
 
     - name: Fail fast?!
       if: steps.linter.outputs.checks-failed > 0
