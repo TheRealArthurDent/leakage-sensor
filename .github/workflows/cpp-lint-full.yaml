@@ -24,6 +24,9 @@ jobs:
         files-changed-only: false
         thread-comments: true
         extra-args: -Iinclude/
+        tidy-checks: -clang-diagnostic-error
+        tidy-review: true
+        format-review: true
 
     - name: Fail fast?!
       if: steps.linter.outputs.checks-failed > 0
