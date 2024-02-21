@@ -1,6 +1,7 @@
 name: CPP Lint Full
 
 on:
+  pull_request:
   push:
     branches:
       - main
