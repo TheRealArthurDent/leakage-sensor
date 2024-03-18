@@ -7,6 +7,9 @@ on:
       - renovate/cpp-linter-**
   workflow_dispatch:
 
+permissions:
+  issues: write
+
 jobs:
   cpp-lint-full:
 
@@ -14,7 +17,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4.1.1
-    - uses: cpp-linter/cpp-linter-action@v2.9.1
+    - uses: cpp-linter/cpp-linter-action@v2.10.0
       id: linter
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
