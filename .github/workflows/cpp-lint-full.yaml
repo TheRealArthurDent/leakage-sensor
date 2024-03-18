@@ -24,7 +24,7 @@ jobs:
       with:
         style: file
         files-changed-only: false
-        thread-comments: true
+        #thread-comments: true - currently not working
         extra-args: -Iinclude/
 
     - name: Fail fast?!
