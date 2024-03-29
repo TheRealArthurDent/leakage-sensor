@@ -13,18 +13,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4.1.1
-    - uses: cpp-linter/cpp-linter-action@v2.10.2
-      id: linter
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        style: file
-        thread-comments: true
-        extra-args: -Iinclude/
+      - name: Checkout repository
+        uses: actions/checkout@v4.1.1
 
-    - name: Fail fast?!
-      if: steps.linter.outputs.checks-failed > 0
-      run: echo "Some files failed the linting checks!"
-      # for actual deployment
-      # run: exit 1
+      - name: CPP Lint
+        uses: cpp-linter/cpp-linter-action@v2.10.2
+        id: linter
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          style: file
+          thread-comments: true
+          extra-args: -Iinclude/
+
+      - name: Fail fast?!
+        if: steps.linter.outputs.checks-failed > 0
+        shell: bash
+        run: |
+          #!/bin/bash
+          echo "Some files failed the linting checks!"
+          # for actual deployment
+          # exit 1
