@@ -118,7 +118,7 @@ jobs:
         ${{ steps.cache-restore-pip.outputs.cache-hit }} &&
         ${{ steps.cache-updates.outputs.pip }} == "true" &&
         false
-      continue-on-error: true
+      #continue-on-error: true
       run: |
         gh extension install actions/gh-actions-cache
         gh actions-cache delete "${{ steps.cache-keys.outputs.pip }}" --confirm
@@ -130,7 +130,7 @@ jobs:
         ${{ steps.cache-restore-platformio.outputs.cache-hit }} &&
         ${{ steps.cache-updates.outputs.platformio }} == true &&
         false
-      continue-on-error: true
+      #continue-on-error: true
       run: |
         gh extension install actions/gh-actions-cache
         gh actions-cache delete "${{ steps.cache-keys.outputs.platformio }}" --confirm
