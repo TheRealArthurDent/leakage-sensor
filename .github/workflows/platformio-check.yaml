@@ -61,11 +61,11 @@ jobs:
         #!/bin/bash
         cacheSizePip=0
         if [ -d ${{ env.PIP_CACHE_FOLDER }} ]; then
-          cacheSizePip=$(du -s ${{ env.PIP_CACHE_FOLDER }})
+          cacheSizePip=$(echo $(du -s ${{ env.PIP_CACHE_FOLDER }}) | awk '{print $1}')
         fi
         cacheSizePlatformio=0
         if [ -d ${{ env.PLATFORMIO_CACHE_FOLDER }} ]; then
-          cacheSizePlatformio=$(du -s ${{ env.PLATFORMIO_CACHE_FOLDER }})
+          cacheSizePlatformio=$(echo $(du -s ${{ env.PLATFORMIO_CACHE_FOLDER }}) | awk '{print $1}')
         fi
         echo "Cache sizes: Pip:$cacheSizePip, Platformio:$cacheSizePlatformio"
         echo "pip=$cacheSizePip" >> "$GITHUB_OUTPUT"
@@ -91,7 +91,7 @@ jobs:
         #!/bin/bash
         cacheSizePip=0
         if [ -d ${{ env.PIP_CACHE_FOLDER }} ]; then
-          cacheSizePip=$(du -s ${{ env.PIP_CACHE_FOLDER }})
+          cacheSizePip=$(echo $(du -s ${{ env.PIP_CACHE_FOLDER }}) | awk '{print $1}')
         fi
         cacheUpdatePip=false
         if [ "$cacheSizePip" != "${{ steps.cache-sizes.outputs.pip }}" ]; then
@@ -100,7 +100,7 @@ jobs:
 
         cacheSizePlatformio=0
         if [ -d ${{ env.PLATFORMIO_CACHE_FOLDER }} ]; then
-          cacheSizePlatformio=$(du -s ${{ env.PLATFORMIO_CACHE_FOLDER }})
+          cacheSizePlatformio=$(echo $(du -s ${{ env.PLATFORMIO_CACHE_FOLDER }}) | awk '{print $1}')
         fi
         cacheUpdatePlatformio=false
         if [ "$cacheSizePlatformio" != "${{ steps.cache-sizes.outputs.platformio }}" ]; then
@@ -114,11 +114,20 @@ jobs:
 
     # overwrite cache key: delete previous and save current
     - name: Delete Previous Cache Pip
-      if: ${{ steps.cache-restore-pip.outputs.cache-hit }} #&& ${{ steps.cache-updates.outputs.pip }}
+      if: ${{ steps.cache-restore-pip.outputs.cache-hit }} && ${{ steps.cache-updates.outputs.pip }}
       continue-on-error: true
       run: |
         gh extension install actions/gh-actions-cache
         gh actions-cache delete "${{ steps.cache-keys.outputs.pip }}" --confirm
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Delete Previous Cache Platformio
+      if: ${{ steps.cache-restore-platformio.outputs.cache-hit }} && ${{ steps.cache-updates.outputs.platformio }}
+      continue-on-error: true
+      run: |
+        gh extension install actions/gh-actions-cache
+        gh actions-cache delete "${{ steps.cache-keys.outputs.platformio }}" --confirm
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
