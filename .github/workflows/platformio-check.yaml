@@ -116,7 +116,8 @@ jobs:
     - name: Delete Previous Cache Pip
       if: |
         ${{ steps.cache-restore-pip.outputs.cache-hit }} &&
-        ${{ steps.cache-updates.outputs.pip }} == "true"
+        ${{ steps.cache-updates.outputs.pip }} == "true" &&
+        false
       continue-on-error: true
       run: |
         gh extension install actions/gh-actions-cache
@@ -127,7 +128,8 @@ jobs:
     - name: Delete Previous Cache Platformio
       if: |
         ${{ steps.cache-restore-platformio.outputs.cache-hit }} &&
-        ${{ steps.cache-updates.outputs.platformio }} == true
+        ${{ steps.cache-updates.outputs.platformio }} == true &&
+        false
       continue-on-error: true
       run: |
         gh extension install actions/gh-actions-cache
