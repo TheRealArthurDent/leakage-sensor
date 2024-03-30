@@ -114,7 +114,7 @@ jobs:
 
     # overwrite cache key: delete previous and save current
     - name: Delete Previous Cache Pip
-      if: ${{ false && (steps.cache-restore-pip.outputs.cache-hit == "true") }}
+      if: ${{ false && (steps.cache-restore-pip.outputs.cache-hit == 'true') }}
 #      if: |
 #        ${{ steps.cache-restore-pip.outputs.cache-hit }} &&
 #        ${{ steps.cache-updates.outputs.pip }} == "true" &&
