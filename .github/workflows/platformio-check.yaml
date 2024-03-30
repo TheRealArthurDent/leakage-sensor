@@ -114,12 +114,8 @@ jobs:
 
     # overwrite cache key: delete previous and save current
     - name: Delete Previous Cache Pip
-      if: ${{ false && (steps.cache-restore-pip.outputs.cache-hit == 'true') }}
-#      if: |
-#        ${{ steps.cache-restore-pip.outputs.cache-hit }} &&
-#        ${{ steps.cache-updates.outputs.pip }} == "true" &&
-#        false
-      #continue-on-error: true
+      if: ${{ (steps.cache-restore-pip.outputs.cache-hit == 'true') && (steps.cache-updates.outputs.pip }} == 'true') }}
+      continue-on-error: true
       run: |
         gh extension install actions/gh-actions-cache
         gh actions-cache delete "${{ steps.cache-keys.outputs.pip }}" --confirm
@@ -127,11 +123,8 @@ jobs:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Delete Previous Cache Platformio
-      if: |
-        ${{ steps.cache-restore-platformio.outputs.cache-hit }} &&
-        ${{ steps.cache-updates.outputs.platformio }} == true &&
-        false
-      #continue-on-error: true
+      if: ${{ (steps.cache-restore-platformio.outputs.cache-hit == 'true') && (steps.cache-updates.outputs.platformio }} == 'true') }}
+      continue-on-error: true
       run: |
         gh extension install actions/gh-actions-cache
         gh actions-cache delete "${{ steps.cache-keys.outputs.platformio }}" --confirm
@@ -139,7 +132,7 @@ jobs:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Save Cache Pip
-      if: ${{ steps.cache-updates.outputs.pip }}
+      if: ${{ steps.cache-updates.outputs.pip == 'true' }}
       uses: actions/cache/save@v4.0.2
       with:
         path: |
@@ -147,7 +140,7 @@ jobs:
         key: ${{ steps.cache-keys.outputs.pip }}
 
     - name: Save Cache Platformio
-      if: ${{ steps.cache-updates.outputs.platformio }}
+      if: ${{ steps.cache-updates.outputs.platformio  == 'true' }}
       uses: actions/cache/save@v4.0.2
       with:
         path: |
