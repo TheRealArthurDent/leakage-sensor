@@ -114,10 +114,11 @@ jobs:
 
     # overwrite cache key: delete previous and save current
     - name: Delete Previous Cache Pip
-      if: |
-        ${{ steps.cache-restore-pip.outputs.cache-hit }} &&
-        ${{ steps.cache-updates.outputs.pip }} == "true" &&
-        false
+      if: false
+#      if: |
+#        ${{ steps.cache-restore-pip.outputs.cache-hit }} &&
+#        ${{ steps.cache-updates.outputs.pip }} == "true" &&
+#        false
       #continue-on-error: true
       run: |
         gh extension install actions/gh-actions-cache
