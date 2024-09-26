@@ -1,27 +1,10 @@
 #include "mqtt-client.hpp"
 #include "debug.h"
 #include "wifi-connection.hpp"
-#include <AsyncMqttClient.hpp>
-#include <Ticker.h>
-
-const int QOS_AT_MOST_ONCE = 0;
-const int QOS_AT_LEAST_ONCE = 1;
-const int QOS_EXACTLY_ONCE = 2;
-
-const char *TOPIC_BASE = "subscribers/";
-const char *TOPIC_CONNECTION_STATUS = "/connection-status";
-
-AsyncMqttClient mqttClient;
-Ticker mqttReconnectTimer;
 
 void MqttClient::init()
 {
-  connectionStatusTopic = new char[strlen(TOPIC_BASE) + strlen(SECRET_HOSTNAME) + strlen(TOPIC_CONNECTION_STATUS)];
-
-  strcpy(connectionStatusTopic, TOPIC_BASE);
-  strcat(connectionStatusTopic, SECRET_HOSTNAME);
-  strcat(connectionStatusTopic, TOPIC_CONNECTION_STATUS);
-  mqttClient.setWill(connectionStatusTopic, QOS_AT_LEAST_ONCE, true, "DISCONNECTED");
+  mqttClient.setWill(connectionStatusTopic.c_str(), AT_LEAST_ONCE, true, "DISCONNECTED");
 
   // mqttClient.onConnect(onConnect);
   mqttClient.onConnect([this](bool sessionPresent)
@@ -63,17 +46,17 @@ void MqttClient::onWifiConnectionLost()
 
 void MqttClient::onConnect(bool sessionPresent)
 {
+  connected = true;
   DEBUG_PRINT("Connected to MQTT. ");
   DEBUG_PRINT("Session present: ");
   DEBUG_PRINTLN(sessionPresent);
 
-  mqttClient.publish(connectionStatusTopic, QOS_AT_LEAST_ONCE, true, "CONNECTED");
-
-  mqttClient.subscribe("mqttclient/test", 2);
+  mqttClient.publish(connectionStatusTopic.c_str(), AT_LEAST_ONCE, true, "CONNECTED");
 }
 
 void MqttClient::onDisconnect(AsyncMqttClientDisconnectReason reason)
 {
+  connected = false;
   DEBUG_PRINTLN("Disconnected from MQTT.");
 
   if (WifiConnection::getInstance().isConnected())
@@ -103,20 +86,18 @@ void MqttClient::onMessage(char *topic, char *payload, AsyncMqttClientMessagePro
   DEBUG_PRINTLN(index);
   DEBUG_PRINT("  total: ");
   DEBUG_PRINTLN(total);
-
-  char testTopic[80];
-  strcpy(testTopic, TOPIC_BASE);
-  strcat(testTopic, SECRET_HOSTNAME);
-  strcat(testTopic, "/latestReceived");
-  mqttClient.publish(testTopic, QOS_AT_MOST_ONCE, false, payload, len);
 }
 
-void MqttClient::publish(char *channel, char *payload)
+bool MqttClient::isConnected()
 {
-  char topic[256];
-  strcpy(topic, TOPIC_BASE);
-  strcat(topic, SECRET_HOSTNAME);
-  strcat(topic, "/");
-  strcat(topic, channel);
-  mqttClient.publish(topic, QOS_AT_LEAST_ONCE, false, payload, strlen(payload));
+  return connected;
+}
+
+bool MqttClient::publish(std::string topic, std::string payload, Qos qos, bool retain)
+{
+  if (!connected)
+  {
+    return false;
+  }
+  return 0 != mqttClient.publish(topic.c_str(), qos, retain, payload.c_str(), payload.size());
 }
