@@ -5,10 +5,12 @@
     ],
     "packageRules": [
         {
-            "description": "Auto merge all minor and patch updates to github-actions. Do it without a PR to reduce noise.",
+            "description": "Auto merge all minor and patch updates to github-actions, pip_requirements and pyenv. Do it without a PR to reduce noise.",
             "groupName": "github-actions",
             "matchManagers": [
-                "github-actions"
+                "github-actions",
+                "pip_requirements",
+                "pyenv"
             ],
             "matchUpdateTypes": [
                 "minor",
@@ -23,11 +25,13 @@
             "automergeType": "branch"
         },
         {
-            "description": "Create PRs for major changes to github-actions itself.",
+            "description": "Create PRs for major changes to github-actions, pip_requirements and pyenv.",
             "groupName": "github-actions MAJOR",
             "commitMessagePrefix": "[MAJOR] ",
             "matchManagers": [
-                "github-actions"
+                "github-actions",
+                "pip_requirements",
+                "pyenv"
             ],
             "matchUpdateTypes": [
                 "major"
