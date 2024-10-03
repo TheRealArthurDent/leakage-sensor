@@ -6,7 +6,7 @@
     "packageRules": [
         {
             "description": "Auto merge all minor and patch updates to github-actions, pip_requirements and pyenv. Do it without a PR to reduce noise.",
-            "groupName": "github-actions",
+            "groupName": "auto merge",
             "matchManagers": [
                 "github-actions",
                 "pip_requirements",
@@ -26,7 +26,7 @@
         },
         {
             "description": "Create PRs for major changes to github-actions, pip_requirements and pyenv.",
-            "groupName": "github-actions MAJOR",
+            "groupName": "MAJOR",
             "commitMessagePrefix": "[MAJOR] ",
             "matchManagers": [
                 "github-actions",
