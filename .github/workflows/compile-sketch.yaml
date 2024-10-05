@@ -7,8 +7,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-for-esp8266:
-    name: ${{ matrix.board.fqbn }}
+  compile-sketch:
+    name: ${{ matrix.fqbn }}
     runs-on: ubuntu-latest
 
     strategy:

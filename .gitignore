@@ -13,5 +13,5 @@
 secrets.ini
 *secrets.h
 
-# Arduino IDE compatability
+# Arduino IDE compatibility
 esp8266-mqtt-client/
