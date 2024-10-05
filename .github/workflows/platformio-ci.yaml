@@ -13,34 +13,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4.2.0
+      - name: Checkout repository
+        uses: actions/checkout@v4.2.0
 
-    - name: Copy secrets template
-      run: |
-        cp secrets.ini.template secrets.ini
+      - name: Copy secrets template
+        run: |
+          cp secrets.ini.template secrets.ini
 
-    - name: Set up Python
-      uses: actions/setup-python@v5.2.0
-      with:
-        python-version-file: '.python-version'
+      - name: Set up Python
+        uses: actions/setup-python@v5.2.0
+        with:
+          python-version-file: '.python-version'
 
-    - name: Cache PlatformIO
-      uses: actions/cache@v4.0.2
-      with:
-        path: |
-          ~/.cache/pip
-          ~/.platformio/.cache
-        key: ${{ runner.os }}-pio-${{ hashFiles('**/requirements.txt') }}
+      - name: Cache PlatformIO
+        uses: actions/cache@v4.0.2
+        with:
+          path: |
+            ~/.cache/pip
+            ~/.platformio/.cache
+          key: ${{ runner.os }}-pio-${{ hashFiles('**/requirements.txt') }}
 
-    - name: Install PlatformIO
-      shell: bash
-      run: |
-        #!/bin/bash
-        pip install --upgrade platformio
+      - name: Install PlatformIO
+        shell: bash
+        run: |
+          #!/bin/bash
+          pip install --upgrade platformio
 
-    - name: Check PlatformIO
-      shell: bash
-      run: |
-        #!/bin/bash
-        pio run -e nodemcuv2 -e nodemcuv2_DEBUG
+      - name: Check PlatformIO
+        shell: bash
+        run: |
+          #!/bin/bash
+          pio run -e nodemcuv2 -e nodemcuv2_DEBUG
