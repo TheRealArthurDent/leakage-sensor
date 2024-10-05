@@ -17,133 +17,131 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4.2.0
+      - name: Checkout repository
+        uses: actions/checkout@v4.2.0
 
-    - name: Copy secrets template
-      run: |
-        cp secrets.ini.template secrets.ini
+      - name: Copy secrets template
+        run: |
+          cp secrets.ini.template secrets.ini
 
-    - name: Set up Python
-      uses: actions/setup-python@v5.2.0
-      with:
-        python-version-file: '.python-version'
+      - name: Set up Python
+        uses: actions/setup-python@v5.2.0
+        with:
+          python-version-file: '.python-version'
 
-    - name: Generate cache keys
-      id: cache-keys
-      shell: bash
-      run: |
-        #!/bin/bash
-        hash=${{ hashFiles('**/requirements.txt') }}
-        echo "pip=${{ runner.os }}-pip-$hash" >> "$GITHUB_OUTPUT"
-        echo "platformio=${{ runner.os }}-platformio-$hash" >> "$GITHUB_OUTPUT"
+      - name: Generate cache keys
+        id: cache-keys
+        shell: bash
+        run: |
+          #!/bin/bash
+          hash=${{ hashFiles('**/requirements.txt') }}
+          echo "pip=${{ runner.os }}-pip-$hash" >> "$GITHUB_OUTPUT"
+          echo "platformio=${{ runner.os }}-platformio-$hash" >> "$GITHUB_OUTPUT"
 
-    - name: Restore Cache PIP
-      id: cache-restore-pip
-      uses: actions/cache/restore@v4.0.2
-      with:
-        path: |
-          ${{ env.PIP_CACHE_FOLDER }}
-        key: ${{ steps.cache-keys.outputs.pip }}
+      - name: Restore Cache PIP
+        id: cache-restore-pip
+        uses: actions/cache/restore@v4.0.2
+        with:
+          path: |
+            ${{ env.PIP_CACHE_FOLDER }}
+          key: ${{ steps.cache-keys.outputs.pip }}
 
-    - name: Restore Cache PlatformIO
-      id: cache-restore-platformio
-      uses: actions/cache/restore@v4.0.2
-      with:
-        path: |
-          ${{ env.PLATFORMIO_CACHE_FOLDER }}
-        key: ${{ steps.cache-keys.outputs.platformio }}
+      - name: Restore Cache PlatformIO
+        id: cache-restore-platformio
+        uses: actions/cache/restore@v4.0.2
+        with:
+          path: |
+            ${{ env.PLATFORMIO_CACHE_FOLDER }}
+          key: ${{ steps.cache-keys.outputs.platformio }}
 
-    - name: Determine Cache Sizes
-      id: cache-sizes
-      shell: bash
-      run: |
-        #!/bin/bash
-        cacheSizePip=0
-        if [ -d ${{ env.PIP_CACHE_FOLDER }} ]; then
-          cacheSizePip=$(du -s ${{ env.PIP_CACHE_FOLDER }} | awk '{print $1}')
-        fi
-        cacheSizePlatformio=0
-        if [ -d ${{ env.PLATFORMIO_CACHE_FOLDER }} ]; then
-          cacheSizePlatformio=$(du -s ${{ env.PLATFORMIO_CACHE_FOLDER }} | \
-                                awk '{print $1}')
-        fi
-        echo "Cache sizes: Pip:$cacheSizePip, Platformio:$cacheSizePlatformio"
-        echo "pip=$cacheSizePip" >> "$GITHUB_OUTPUT"
-        echo "platformio=$cacheSizePlatformio" >> "$GITHUB_OUTPUT"
+      - name: Determine Cache Sizes
+        id: cache-sizes
+        shell: bash
+        run: |
+          #!/bin/bash
+          cacheSizePip=0
+          if [ -d ${{ env.PIP_CACHE_FOLDER }} ]; then
+            cacheSizePip=$(du -s ${{ env.PIP_CACHE_FOLDER }} | awk '{print $1}')
+          fi
+          cacheSizePlatformio=0
+          if [ -d ${{ env.PLATFORMIO_CACHE_FOLDER }} ]; then
+            cacheSizePlatformio=$(du -s ${{ env.PLATFORMIO_CACHE_FOLDER }} | awk '{print $1}')
+          fi
+          echo "Cache sizes: Pip:$cacheSizePip, Platformio:$cacheSizePlatformio"
+          echo "pip=$cacheSizePip" >> "$GITHUB_OUTPUT"
+          echo "platformio=$cacheSizePlatformio" >> "$GITHUB_OUTPUT"
 
-    - name: Install PlatformIO
-      shell: bash
-      run: |
-        #!/bin/bash
-        pip install -r requirements.txt
+      - name: Install PlatformIO
+        shell: bash
+        run: |
+          #!/bin/bash
+          pip install -r requirements.txt
 
-    - name: Check PlatformIO
-      shell: bash
-      run: |
-        #!/bin/bash
-        pio check -e nodemcuv2_DEBUG
+      - name: Check PlatformIO
+        shell: bash
+        run: |
+          #!/bin/bash
+          pio check -e nodemcuv2_DEBUG
 
-    - name: Determine Cache Update
-      id: cache-updates
-      shell: bash
-      run: |
-        #!/bin/bash
-        cacheSizePip=0
-        if [ -d ${{ env.PIP_CACHE_FOLDER }} ]; then
-          cacheSizePip=$(du -s ${{ env.PIP_CACHE_FOLDER }} | awk '{print $1}')
-        fi
-        cacheUpdatePip=false
-        if [ "$cacheSizePip" != "${{ steps.cache-sizes.outputs.pip }}" ]; then
-          cacheUpdatePip=true
-        fi
+      - name: Determine Cache Update
+        id: cache-updates
+        shell: bash
+        run: |
+          #!/bin/bash
+          cacheSizePip=0
+          if [ -d ${{ env.PIP_CACHE_FOLDER }} ]; then
+            cacheSizePip=$(du -s ${{ env.PIP_CACHE_FOLDER }} | awk '{print $1}')
+          fi
+          cacheUpdatePip=false
+          if [ "$cacheSizePip" != "${{ steps.cache-sizes.outputs.pip }}" ]; then
+            cacheUpdatePip=true
+          fi
 
-        cacheSizePlatformio=0
-        if [ -d ${{ env.PLATFORMIO_CACHE_FOLDER }} ]; then
-          cacheSizePlatformio=$(du -s ${{ env.PLATFORMIO_CACHE_FOLDER }} | \
-                                awk '{print $1}')
-        fi
-        cacheUpdatePlatformio=false
-        if [ "$cacheSizePlatformio" != "${{ steps.cache-sizes.outputs.platformio }}" ]; then
-          cacheUpdatePlatformio=true
-        fi
-        echo "Update pip cache: ${cacheUpdatePip} - old size: ${{ steps.cache-sizes.outputs.pip }}, new size: ${cacheSizePip}"
-        echo "Update platformio cache: ${cacheUpdatePlatformio} - old size: ${{ steps.cache-sizes.outputs.platformio }}, new size: ${cacheSizePlatformio}"
+          cacheSizePlatformio=0
+          if [ -d ${{ env.PLATFORMIO_CACHE_FOLDER }} ]; then
+            cacheSizePlatformio=$(du -s ${{ env.PLATFORMIO_CACHE_FOLDER }} | awk '{print $1}')
+          fi
+          cacheUpdatePlatformio=false
+          if [ "$cacheSizePlatformio" != "${{ steps.cache-sizes.outputs.platformio }}" ]; then
+            cacheUpdatePlatformio=true
+          fi
+          echo "Update pip cache: ${cacheUpdatePip} - old size: ${{ steps.cache-sizes.outputs.pip }}, new size: ${cacheSizePip}"
+          echo "Update platformio cache: ${cacheUpdatePlatformio} - old size: ${{ steps.cache-sizes.outputs.platformio }}, new size: ${cacheSizePlatformio}"
 
-        echo "pip=$cacheUpdatePip" >> "$GITHUB_OUTPUT"
-        echo "platformio=$cacheUpdatePlatformio" >> "$GITHUB_OUTPUT"
+          echo "pip=$cacheUpdatePip" >> "$GITHUB_OUTPUT"
+          echo "platformio=$cacheUpdatePlatformio" >> "$GITHUB_OUTPUT"
 
-    # overwrite cache key: delete previous and save current
-    - name: Delete Previous Cache Pip
-      if: ${{ (steps.cache-restore-pip.outputs.cache-hit == 'true') && (steps.cache-updates.outputs.pip == 'true') }}
-      continue-on-error: true
-      run: |
-        gh extension install actions/gh-actions-cache
-        gh actions-cache delete "${{ steps.cache-keys.outputs.pip }}" --confirm
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # overwrite cache key: delete previous and save current
+      - name: Delete Previous Cache Pip
+        if: ${{ (steps.cache-restore-pip.outputs.cache-hit == 'true') && (steps.cache-updates.outputs.pip == 'true') }}
+        continue-on-error: true
+        run: |
+          gh extension install actions/gh-actions-cache
+          gh actions-cache delete "${{ steps.cache-keys.outputs.pip }}" --confirm
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Delete Previous Cache Platformio
-      if: ${{ (steps.cache-restore-platformio.outputs.cache-hit == 'true') && (steps.cache-updates.outputs.platformio == 'true') }}
-      continue-on-error: true
-      run: |
-        gh extension install actions/gh-actions-cache
-        gh actions-cache delete "${{ steps.cache-keys.outputs.platformio }}" --confirm
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Delete Previous Cache Platformio
+        if: ${{ (steps.cache-restore-platformio.outputs.cache-hit == 'true') && (steps.cache-updates.outputs.platformio == 'true') }}
+        continue-on-error: true
+        run: |
+          gh extension install actions/gh-actions-cache
+          gh actions-cache delete "${{ steps.cache-keys.outputs.platformio }}" --confirm
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Save Cache Pip
-      if: ${{ steps.cache-updates.outputs.pip == 'true' }}
-      uses: actions/cache/save@v4.0.2
-      with:
-        path: |
-          ${{ env.PIP_CACHE_FOLDER }}
-        key: ${{ steps.cache-keys.outputs.pip }}
+      - name: Save Cache Pip
+        if: ${{ steps.cache-updates.outputs.pip == 'true' }}
+        uses: actions/cache/save@v4.0.2
+        with:
+          path: |
+            ${{ env.PIP_CACHE_FOLDER }}
+          key: ${{ steps.cache-keys.outputs.pip }}
 
-    - name: Save Cache Platformio
-      if: ${{ steps.cache-updates.outputs.platformio  == 'true' }}
-      uses: actions/cache/save@v4.0.2
-      with:
-        path: |
-          ${{ env.PLATFORMIO_CACHE_FOLDER }}
-        key: ${{ steps.cache-keys.outputs.platformio }}
+      - name: Save Cache Platformio
+        if: ${{ steps.cache-updates.outputs.platformio  == 'true' }}
+        uses: actions/cache/save@v4.0.2
+        with:
+          path: |
+            ${{ env.PLATFORMIO_CACHE_FOLDER }}
+          key: ${{ steps.cache-keys.outputs.platformio }}
