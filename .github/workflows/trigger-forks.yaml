@@ -18,8 +18,10 @@ jobs:
     steps:
       - name: Dispatch to workflows
         run: |
-            curl -H "Accept: application/vnd.github.everest-preview+json" \
+            curl \
+            --header "Accept: application/vnd.github.everest-preview+json" \
+            --header "Authorization: token ${{ secrets.DISPATCH_TOKEN }}" \
             --fail \
-            -H "Authorization: token ${{ secrets.DISPATCH_TOKEN }}" \
             --request POST \
-            --data '{"event_type": "push_main", "client_payload": { "foo": "bar" }}' https://api.github.com/repos/${{ matrix.repo }}/dispatches
+            --data '{"event_type": "push_main", "client_payload": { "foo": "bar" }}' \
+            https://api.github.com/repos/${{ matrix.repo }}/dispatches
