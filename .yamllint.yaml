@@ -21,8 +21,7 @@ rules:
   key-duplicates: enable
   key-ordering: disable
   # deviation from default
-  line-length:
-    level: warning
+  line-length: disable
   new-line-at-end-of-file: enable
   new-lines: enable
   octal-values: disable
