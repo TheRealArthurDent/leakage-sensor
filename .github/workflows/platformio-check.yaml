@@ -61,11 +61,12 @@ jobs:
         #!/bin/bash
         cacheSizePip=0
         if [ -d ${{ env.PIP_CACHE_FOLDER }} ]; then
-          cacheSizePip=$(echo $(du -s ${{ env.PIP_CACHE_FOLDER }}) | awk '{print $1}')
+          cacheSizePip=$(du -s ${{ env.PIP_CACHE_FOLDER }} | awk '{print $1}')
         fi
         cacheSizePlatformio=0
         if [ -d ${{ env.PLATFORMIO_CACHE_FOLDER }} ]; then
-          cacheSizePlatformio=$(echo $(du -s ${{ env.PLATFORMIO_CACHE_FOLDER }}) | awk '{print $1}')
+          cacheSizePlatformio=$(du -s ${{ env.PLATFORMIO_CACHE_FOLDER }} | \
+                                awk '{print $1}')
         fi
         echo "Cache sizes: Pip:$cacheSizePip, Platformio:$cacheSizePlatformio"
         echo "pip=$cacheSizePip" >> "$GITHUB_OUTPUT"
@@ -85,13 +86,12 @@ jobs:
 
     - name: Determine Cache Update
       id: cache-updates
-      #if: ${{ steps.cache-restore-platformio.outputs.cache-hit }}
       shell: bash
       run: |
         #!/bin/bash
         cacheSizePip=0
         if [ -d ${{ env.PIP_CACHE_FOLDER }} ]; then
-          cacheSizePip=$(echo $(du -s ${{ env.PIP_CACHE_FOLDER }}) | awk '{print $1}')
+          cacheSizePip=$(du -s ${{ env.PIP_CACHE_FOLDER }} | awk '{print $1}')
         fi
         cacheUpdatePip=false
         if [ "$cacheSizePip" != "${{ steps.cache-sizes.outputs.pip }}" ]; then
@@ -100,7 +100,8 @@ jobs:
 
         cacheSizePlatformio=0
         if [ -d ${{ env.PLATFORMIO_CACHE_FOLDER }} ]; then
-          cacheSizePlatformio=$(echo $(du -s ${{ env.PLATFORMIO_CACHE_FOLDER }}) | awk '{print $1}')
+          cacheSizePlatformio=$(du -s ${{ env.PLATFORMIO_CACHE_FOLDER }} | \
+                                awk '{print $1}')
         fi
         cacheUpdatePlatformio=false
         if [ "$cacheSizePlatformio" != "${{ steps.cache-sizes.outputs.platformio }}" ]; then
