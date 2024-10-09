@@ -11,7 +11,7 @@ docs/.~lock.*
 .vscode/launch.json
 .vscode/ipch
 
-# Apparently platformio decided to create thi file ...
+# Apparently platformio decided to create this file ...
 2
 
 # Do not push secrets files.
@@ -19,5 +19,5 @@ docs/.~lock.*
 secrets.ini
 *secrets.h
 
-# Arduino IDE compatability
+# Arduino IDE compatibility
 leakage-sensor/
