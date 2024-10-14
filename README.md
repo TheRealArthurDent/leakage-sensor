@@ -6,11 +6,12 @@ License
 
 Status
 
+[![CodeQL](https://github.com/TheRealArthurDent/esp8266-wifi-participant/actions/workflows/codeql.yaml/badge.svg)](https://github.com/TheRealArthurDent/esp8266-wifi-participant/actions/workflows/codeql.yaml)
 [![PlatformIO Code Check](https://github.com/TheRealArthurDent/esp8266-wifi-participant/actions/workflows/platformio-check.yaml/badge.svg)](https://github.com/TheRealArthurDent/esp8266-wifi-participant/actions/workflows/platformio-check.yaml)
 [![PlatformIO CI](https://github.com/TheRealArthurDent/esp8266-wifi-participant/actions/workflows/platformio-ci.yaml/badge.svg)](https://github.com/TheRealArthurDent/esp8266-wifi-participant/actions/workflows/platformio-ci.yaml)
 [![CPP Lint status](https://github.com/TheRealArthurDent/esp8266-wifi-participant/actions/workflows/cpp-lint.yaml/badge.svg)](https://github.com/TheRealArthurDent/esp8266-wifi-participant/actions/workflows/cpp-lint.yaml)
 [![Spell Check status](https://github.com/TheRealArthurDent/esp8266-wifi-participant/actions/workflows/spell-check.yaml/badge.svg)](https://github.com/TheRealArthurDent/esp8266-wifi-participant/actions/workflows/spell-check.yaml)
-[![Markdown Lint](https://github.com/TheRealArthurDent/esp8266-wifi-participant/actions/workflows/markdown-lint.yaml/badge.svg)](https://github.com/TheRealArthurDent/esp8266-wifi-participant/actions/workflows/markdown-lint.yaml)
+[![Review dog](https://github.com/TheRealArthurDent/esp8266-wifi-participant/actions/workflows/reviewdog.yaml/badge.svg)](https://github.com/TheRealArthurDent/esp8266-wifi-participant/actions/workflows/reviewdog.yaml)
 
 ## Compatibility with Arduino IDE
 
