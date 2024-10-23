@@ -1,4 +1,4 @@
-name: Review dog
+name: 🐶 Reviewdog
 
 on:
   pull_request:
@@ -16,9 +16,9 @@ jobs:
         uses: reviewdog/action-misspell@v1.23.0
         with:
           reporter: github-pr-review
+          fail_on_error: true
           locale: US
           ignore: mosquitto
-          fail_on_error: true
 
       - name: Action lint
         uses: reviewdog/action-actionlint@v1.57.0
