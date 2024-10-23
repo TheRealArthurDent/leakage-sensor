@@ -1,4 +1,4 @@
-name: CPP Lint
+name: 🔍 CPP Lint
 
 on:
   pull_request:
