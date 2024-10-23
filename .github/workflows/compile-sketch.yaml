@@ -1,4 +1,4 @@
-name: Compile Sketch
+name: 🔨 Compile Sketch
 on:
   push:
     branches:
