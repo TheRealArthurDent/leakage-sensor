@@ -1,42 +1,84 @@
 {
-    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "reviewers": [
-        "TheRealArthurDent"
-    ],
-    "packageRules": [
-        {
-            "description": "Auto merge all minor and patch updates to github-actions, pip_requirements and pyenv. Do it without a PR to reduce noise.",
-            "groupName": "auto merge",
-            "matchManagers": [
-                "github-actions",
-                "pip_requirements",
-                "pyenv"
-            ],
-            "matchUpdateTypes": [
-                "minor",
-                "patch",
-                "pin",
-                "digest"
-            ],
-            "automerge": true,
-            "addLabels": [
-                "auto-merge"
-            ],
-            "automergeType": "branch"
-        },
-        {
-            "description": "Create PRs for major changes to github-actions, pip_requirements and pyenv.",
-            "groupName": "MAJOR",
-            "commitMessagePrefix": "[MAJOR] ",
-            "matchManagers": [
-                "github-actions",
-                "pip_requirements",
-                "pyenv"
-            ],
-            "matchUpdateTypes": [
-                "major"
-            ],
-            "automerge": false
-        }
-    ]
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "packageRules": [
+    {
+      "addLabels": [
+        "auto-merge"
+      ],
+      "automerge": true,
+      "automergeType": "branch",
+      "description": "Auto merge all minor and patch updates to github-actions, pip_requirements and pyenv. Do it without a PR to reduce noise.",
+      "groupName": "auto merge",
+      "matchManagers": [
+        "github-actions",
+        "pip_requirements",
+        "pyenv"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ]
+    },
+    {
+      "automerge": false,
+      "commitMessagePrefix": "[MAJOR] ",
+      "description": "Create PRs for major changes to github-actions, pip_requirements and pyenv.",
+      "groupName": "MAJOR",
+      "matchManagers": [
+        "github-actions",
+        "pip_requirements",
+        "pyenv"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ]
+    },
+    {
+      "addLabels": [
+        "auto-merge"
+      ],
+      "automerge": true,
+      "automergeType": "branch",
+      "description": "Auto merge all minor and patch updates to pre-commit actions. Do it without a PR to reduce noise.",
+      "groupName": "pre-commit",
+      "matchDatasources": [
+        "github-releases"
+      ],
+      "matchManagers": [
+        "regex"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "schedule": [
+        "before 5am on Tuesday"
+      ]
+    },
+    {
+      "automerge": false,
+      "commitMessagePrefix": "[MAJOR] ",
+      "description": "Create PRs for major changes to pre-commit actions.",
+      "groupName": "pre-commit MAJOR",
+      "matchDatasources": [
+        "github-releases"
+      ],
+      "matchManagers": [
+        "regex"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "schedule": [
+        "before 5am on Tuesday"
+      ]
+    }
+  ],
+  "reviewers": [
+    "TheRealArthurDent"
+  ]
 }
