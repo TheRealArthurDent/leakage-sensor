@@ -9,7 +9,7 @@
 # the `language` matrix defined below to confirm you have the correct set of
 # supported CodeQL languages.
 #
-name: CodeQL
+name: 🕵️ CodeQL
 
 on:
   push:
@@ -86,7 +86,7 @@ jobs:
           python-version-file: '.python-version'
 
       - name: Cache PlatformIO
-        uses: actions/cache@v4.1.1
+        uses: actions/cache@v4.1.2
         with:
           path: |
             ~/.cache/pip

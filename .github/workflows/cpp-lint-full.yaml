@@ -1,4 +1,4 @@
-name: CPP Lint Full
+name: 🔍 CPP Lint Full
 
 on:
   push:
@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v4.2.1
 
       - name: Cpp Lint Full
-        uses: cpp-linter/cpp-linter-action@v2.13.2
+        uses: cpp-linter/cpp-linter-action@v2.13.3
         id: linter
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
